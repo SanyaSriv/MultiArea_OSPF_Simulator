@@ -11,17 +11,17 @@ pygame.display.set_caption("Animation Example")
 
 # Set up the variables for the animation
 box_size = 80
-switch_size = 60
+switch_size = 50
 padding = 20
 border_width = 5
 box_pos = (padding, padding)
-router_radius = 40
+router_radius = 30
 
 # POsition of Area 1 routers
-router_1_pos = (200, 250)
-router_2_pos = (355, 380)
-router_3_pos = (350, 515)
-router_4_pos = (70, 380)
+router_1_pos = (195, 250)
+router_2_pos = (355, 375)
+router_3_pos = (350, 510)
+router_4_pos = (65, 375)
 
 # Position of Area 1 Swicthes
 switch_1_pos = (170, 350)
@@ -58,7 +58,7 @@ pygame.draw.rect(screen, (222, 146, 146), (switch_1_pos[0], switch_1_pos[1], swi
 pygame.draw.rect(screen, (222, 146, 146), (switch_2_pos[0], switch_2_pos[1], switch_size, switch_size))
 
 # Render text to display inside each box
-font = pygame.font.SysFont('Arial', 14)
+font = pygame.font.SysFont('Arial', 12)
 text_1 = font.render('Router 1', True, (0, 0, 0))
 text_2 = font.render('Router 2', True, (0, 0, 0))
 text_3 = font.render('Router 3', True, (0, 0, 0))

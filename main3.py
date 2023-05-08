@@ -9,7 +9,13 @@ size = (1400, 700)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Animation Example")
 
-# Set up the variables for the animation
+# Parameters for Animation buttons
+button_width = 100
+button_height = 30
+button_color = (255, 0, 0)
+button_LSA_1_pos = (20, 20)
+
+# Router and Switch
 box_size = 80
 switch_size = 50
 padding = 20
@@ -173,6 +179,18 @@ def InterAreaConnections():
     closest_point = (int(router_2_pos[0] + router_radius * math.cos(a)), int(router_2_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
+def AddAnimationButtons():
+    # Button for sending LSA 1s
+    pygame.draw.rect(screen, (31, 128, 48), (button_LSA_1_pos[0], button_LSA_1_pos[1], button_width, button_height))
+
+    font = pygame.font.SysFont('Arial', 12)
+    text_1 = font.render('Send LSA 1', True, (0, 0, 0))
+    text_pos_switch = ((button_width - font.size('Send LSA 1')[0]) // 2, (button_height - font.size('Send LSA 1')[1]) // 2)
+    screen.blit(text_1, (button_LSA_1_pos[0] + text_pos_switch[0], button_LSA_1_pos[1] + text_pos_switch[1]))
+
+
+
+
 # Making the boundaries
 AreaBoundaryDrawer()
 
@@ -191,6 +209,8 @@ Area2Connections()
 # Making connections between different areas
 InterAreaConnections()
 
+# Adding the animation buttons
+AddAnimationButtons()
 
 # Update the screen
 pygame.display.flip()

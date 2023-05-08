@@ -20,13 +20,17 @@ box_2_pos = (305, 270)
 box_3_pos = (305, 450)
 box_4_pos = (40, 450)
 switch_1_pos = (170, 350)
+area_1_pos = (20, 200)
+
 screen.fill((255, 255, 255))
+# I want to demarcate what is area 1 by a boundary
+pygame.draw.rect(screen, (231, 230, 240), (area_1_pos[0], area_1_pos[1], box_size * 4.8, box_size * 4.8))
+
 pygame.draw.rect(screen, (194, 206, 207), (box_1_pos[0], box_1_pos[1], box_size, box_size))
 pygame.draw.rect(screen, (194, 206, 207), (box_2_pos[0], box_2_pos[1], box_size, box_size))
 pygame.draw.rect(screen, (194, 206, 207), (box_3_pos[0], box_3_pos[1], box_size, box_size))
 pygame.draw.rect(screen, (194, 206, 207), (box_4_pos[0], box_4_pos[1], box_size, box_size))
 pygame.draw.rect(screen, (163, 122, 113), (switch_1_pos[0], switch_1_pos[1], box_size, box_size))
-
 # Render text to display inside each box
 font = pygame.font.SysFont('Arial', 14)
 text_1 = font.render('Router 1', True, (0, 0, 0))
@@ -50,7 +54,6 @@ line_width = 3
 line_color = (0, 0, 0)
 pygame.draw.line(screen, line_color, (box_1_pos[0] + box_size, box_1_pos[1] + box_size // 2), 
                  (box_2_pos[0], box_2_pos[1] + box_size // 2), line_width)
-
 
 # Update the screen
 pygame.display.flip()

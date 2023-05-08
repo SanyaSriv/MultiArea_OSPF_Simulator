@@ -21,11 +21,25 @@ box_3_pos = (305, 450)
 box_4_pos = (40, 450)
 switch_1_pos = (170, 350)
 area_1_pos = (20, 200)
+area_2_pos = (550, 100) # backbone area
+area_3_pos = (1050, 100) # area 3
+area_4_pos = (1050, 420) # area 4
 
 screen.fill((255, 255, 255))
-# I want to demarcate what is area 1 by a boundary
+
+# Making Area 1 boundary
 pygame.draw.rect(screen, (231, 230, 240), (area_1_pos[0], area_1_pos[1], box_size * 4.8, box_size * 4.8))
 
+# Making the backbone area boundary: I will be calling this area 2
+pygame.draw.rect(screen, (231, 240, 230), (area_2_pos[0], area_2_pos[1], box_size * 3, box_size * 4.8))
+
+# Making a third area: Area 3 
+pygame.draw.rect(screen, (240, 240, 230), (area_3_pos[0], area_3_pos[1], box_size * 3.5, box_size * 3))
+
+# Making a 4th area: Area 4
+pygame.draw.rect(screen, (240, 230, 238), (area_4_pos[0], area_4_pos[1], box_size * 3.5, box_size * 3))
+
+# Mkaing routers for area 1
 pygame.draw.rect(screen, (194, 206, 207), (box_1_pos[0], box_1_pos[1], box_size, box_size))
 pygame.draw.rect(screen, (194, 206, 207), (box_2_pos[0], box_2_pos[1], box_size, box_size))
 pygame.draw.rect(screen, (194, 206, 207), (box_3_pos[0], box_3_pos[1], box_size, box_size))

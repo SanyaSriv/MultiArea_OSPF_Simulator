@@ -164,6 +164,14 @@ def Area2Connections():
     closest_point = (int(router_7_pos[0] + router_radius * math.cos(a)), int(router_7_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
+def InterAreaConnections():
+    # Router 2 (Area 1) --> Router 5 (Area 2)
+    center_box = (router_5_pos[0] - router_radius, router_5_pos[1])
+    x = center_box[0] - router_2_pos[0]
+    y = center_box[1] - router_2_pos[1]
+    a = math.atan2(y, x)
+    closest_point = (int(router_2_pos[0] + router_radius * math.cos(a)), int(router_2_pos[1] + router_radius * math.sin(a)))
+    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
 # Making the boundaries
 AreaBoundaryDrawer()
@@ -179,6 +187,9 @@ Area2Connections()
 # Doing All Area 3 Work
 
 # Doing All Area 4 work
+
+# Making connections between different areas
+InterAreaConnections()
 
 
 # Update the screen

@@ -18,9 +18,9 @@ box_pos = (padding, padding)
 router_radius = 40
 
 # POsition of Area 1 routers
-box_1_pos = (190, 250)
-box_2_pos = (305, 270)
-box_3_pos = (350, 520)
+box_1_pos = (200, 250)
+box_2_pos = (355, 380)
+box_3_pos = (350, 515)
 box_4_pos = (70, 380)
 
 # Position of Area 1 Swicthes
@@ -81,7 +81,7 @@ screen.blit(text_6, (switch_2_pos[0] + text_pos_switch[0], switch_2_pos[1] + tex
 
 # # trying to connect the routers here
 
-# router 1 --> switch 1
+# switch 1 --> router 1
 center_box = (switch_1_pos[0] + switch_size // 2, switch_1_pos[1])
 # finding the closest point
 x = center_box[0] - box_1_pos[0]
@@ -98,11 +98,30 @@ a = math.atan2(y, x)
 closest_point = (int(box_4_pos[0] + router_radius * math.cos(a)), int(box_4_pos[1] + router_radius * math.sin(a)))
 pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
-# pygame.draw.line(screen, (0, 0, 0),  (box_4_pos[0] + router_radius, box_4_pos[1]), center_box, 3)
+# router 4 --> switch 2
+center_box = (switch_2_pos[0] + switch_size // 2, switch_2_pos[1])
+x = center_box[0] - box_4_pos[0]
+y = center_box[1] - box_4_pos[1]
+a = math.atan2(y, x)
+closest_point = (int(box_4_pos[0] + router_radius * math.cos(a)), int(box_4_pos[1] + router_radius * math.sin(a)))
+pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
-# router 4 --> router 2
-center_box = (switch_2_pos[0], switch_2_pos[1] +  switch_size // 2)
-pygame.draw.line(screen, (0, 0, 0),  (box_4_pos[0] + router_radius, box_4_pos[1]), center_box, 3)
+
+# switch 2 --> router 3
+center_box = (switch_2_pos[0] + switch_size, switch_2_pos[1] + switch_size // 2)
+x = center_box[0] - box_3_pos[0]
+y = center_box[1] - box_3_pos[1]
+a = math.atan2(y, x)
+closest_point = (int(box_3_pos[0] + router_radius * math.cos(a)), int(box_3_pos[1] + router_radius * math.sin(a)))
+pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+
+# switch 1 --> router 2
+center_box = (switch_1_pos[0] + switch_size, switch_1_pos[1] + switch_size // 2)
+x = center_box[0] - box_2_pos[0]
+y = center_box[1] - box_2_pos[1]
+a = math.atan2(y, x)
+closest_point = (int(box_2_pos[0] + router_radius * math.cos(a)), int(box_2_pos[1] + router_radius * math.sin(a)))
+pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
 # Update the screen
 pygame.display.flip()

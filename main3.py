@@ -354,6 +354,14 @@ def InterAreaConnections():
     closest_point = (int(router_9_pos[0] + router_radius * math.cos(a)), int(router_9_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
+    # Router 8 (Area 2) --> Router 13 (Area 4)
+    center_box = (router_8_pos[0] + router_radius, router_8_pos[1])
+    x = center_box[0] - router_13_pos[0]
+    y = center_box[1] - router_13_pos[1]
+    a = math.atan2(y, x)
+    closest_point = (int(router_13_pos[0] + router_radius * math.cos(a)), int(router_13_pos[1] + router_radius * math.sin(a)))
+    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+
 def AddAnimationButtons():
     # Button for sending LSA 1s
     pygame.draw.rect(screen, (31, 128, 48), (button_LSA_1_pos[0], button_LSA_1_pos[1], button_width, button_height))

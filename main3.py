@@ -36,13 +36,30 @@ switch_2_pos = (40, 485)
 # Position of all the area boundaries
 area_1_pos = (20, 200)
 area_2_pos = (550, 100) # backbone area
-area_3_pos = (1050, 100) # area 3
-area_4_pos = (1050, 420) # area 4
+area_3_pos = (1010, 100) # area 3
+area_4_pos = (1010, 420) # area 4
 
 # Position of all Area 2 Routers (There would be 3 routers (I am thinking))
-router_5_pos = (670, 150)
-router_6_pos = (670, 290)
-router_7_pos = (670,430)
+router_5_pos = (610, 150)
+router_6_pos = (610, 290)
+router_7_pos = (610,430)
+router_8_pos = (740, 290)
+
+# Position of all Area 3 Routers and switches
+router_9_pos = (1070, 150)
+router_10_pos = (1070, 300)
+router_11_pos = (1270, 150)
+
+switch_3_pos = (1245, 270)
+
+# Position of all Area 4 Routers and switches
+# router_12_pos = ()
+# router_13_pos = ()
+# router_14_pos = ()
+# router_15_pos = ()
+
+# List of all LSAs here (as of now I am planning to represent it by a triangle)
+area_1_LSA_1 = []
 
 screen.fill((255, 255, 255))
 
@@ -54,10 +71,10 @@ def AreaBoundaryDrawer():
     pygame.draw.rect(screen, (231, 240, 230), (area_2_pos[0], area_2_pos[1], box_size * 3, box_size * 4.8))
 
     # Making a third area: Area 3 
-    pygame.draw.rect(screen, (240, 240, 230), (area_3_pos[0], area_3_pos[1], box_size * 3.5, box_size * 3))
+    pygame.draw.rect(screen, (240, 240, 230), (area_3_pos[0], area_3_pos[1], box_size * 4.5, box_size * 3))
 
     # Making a 4th area: Area 4
-    pygame.draw.rect(screen, (240, 230, 238), (area_4_pos[0], area_4_pos[1], box_size * 3.5, box_size * 3))
+    pygame.draw.rect(screen, (240, 230, 238), (area_4_pos[0], area_4_pos[1], box_size * 4.5, box_size * 3))
 
 def RouterSwitchArea1():
     # Mkaing routers for area 1: All routers will be circles
@@ -139,19 +156,22 @@ def RouterSwitchArea2():
     pygame.draw.circle(screen, (159, 173, 191), (router_5_pos[0], router_5_pos[1]), router_radius)
     pygame.draw.circle(screen, (159, 173, 191), (router_6_pos[0], router_6_pos[1]), router_radius)
     pygame.draw.circle(screen, (159, 173, 191), (router_7_pos[0], router_7_pos[1]), router_radius)
+    pygame.draw.circle(screen, (159, 173, 191), (router_8_pos[0], router_8_pos[1]), router_radius)
 
      # Render text to display inside each box
     font = pygame.font.SysFont('Arial', 12)
     text_1 = font.render('Router 5', True, (0, 0, 0))
     text_2 = font.render('Router 6', True, (0, 0, 0))
     text_3 = font.render('Router 7', True, (0, 0, 0))
+    text_4 = font.render('Router 8', True, (0, 0, 0))
 
     # Calculate the position to display the text in the center of each box
     text_pos = ((box_size - font.size('Router 1')[0]) // 2, (box_size - font.size('Router 1')[1]) // 2)
 
     screen.blit(text_1, text_1.get_rect(center=router_5_pos))
-    screen.blit(text_2, text_1.get_rect(center=router_6_pos))
-    screen.blit(text_3, text_1.get_rect(center=router_7_pos))
+    screen.blit(text_2, text_2.get_rect(center=router_6_pos))
+    screen.blit(text_3, text_3.get_rect(center=router_7_pos))
+    screen.blit(text_4, text_4.get_rect(center=router_8_pos))
 
 def Area2Connections():
     # router 5 --> router 6
@@ -169,6 +189,46 @@ def Area2Connections():
     a = math.atan2(y, x)
     closest_point = (int(router_7_pos[0] + router_radius * math.cos(a)), int(router_7_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+
+    # router 5 --> router 8
+    center_box = (router_5_pos[0] + router_radius, router_5_pos[1])
+    x = center_box[0] - router_8_pos[0]
+    y = center_box[1] - router_8_pos[1]
+    a = math.atan2(y, x)
+    closest_point = (int(router_8_pos[0] + router_radius * math.cos(a)), int(router_8_pos[1] + router_radius * math.sin(a)))
+    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+
+    # router 7 --> router 8
+    center_box = (router_7_pos[0] + router_radius, router_7_pos[1])
+    x = center_box[0] - router_8_pos[0]
+    y = center_box[1] - router_8_pos[1]
+    a = math.atan2(y, x)
+    closest_point = (int(router_8_pos[0] + router_radius * math.cos(a)), int(router_8_pos[1] + router_radius * math.sin(a)))
+    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+
+def RouterSwitchArea3():
+    pygame.draw.circle(screen, (159, 173, 191), (router_9_pos[0], router_9_pos[1]), router_radius)
+    pygame.draw.circle(screen, (159, 173, 191), (router_10_pos[0], router_10_pos[1]), router_radius)
+    pygame.draw.circle(screen, (159, 173, 191), (router_11_pos[0], router_11_pos[1]), router_radius)
+
+    pygame.draw.rect(screen, (222, 146, 146), (switch_3_pos[0], switch_3_pos[1], switch_size, switch_size))
+    
+     # Render text to display inside each box
+    font = pygame.font.SysFont('Arial', 12)
+    text_1 = font.render('Router 9', True, (0, 0, 0))
+    text_2 = font.render('Router 10', True, (0, 0, 0))
+    text_3 = font.render('Router 11', True, (0, 0, 0))
+    text_4 = font.render('Switch 3', True, (0, 0, 0))
+
+    # Calculate the position to display the text in the center of each box
+    text_pos = ((box_size - font.size('Router 1')[0]) // 2, (box_size - font.size('Router 1')[1]) // 2)
+
+    text_pos_switch = ((switch_size - font.size('Switch 3')[0]) // 2, (switch_size - font.size('Switch 3')[1]) // 2)
+
+    screen.blit(text_1, text_1.get_rect(center=router_9_pos))
+    screen.blit(text_2, text_2.get_rect(center=router_10_pos))
+    screen.blit(text_3, text_3.get_rect(center=router_11_pos))
+    screen.blit(text_4, (switch_3_pos[0] + text_pos_switch[0], switch_3_pos[1] + text_pos_switch[1]))
 
 def InterAreaConnections():
     # Router 2 (Area 1) --> Router 5 (Area 2)
@@ -188,8 +248,8 @@ def AddAnimationButtons():
     text_pos_switch = ((button_width - font.size('Send LSA 1')[0]) // 2, (button_height - font.size('Send LSA 1')[1]) // 2)
     screen.blit(text_1, (button_LSA_1_pos[0] + text_pos_switch[0], button_LSA_1_pos[1] + text_pos_switch[1]))
 
-
-
+def Send_LSA_1():
+    pass
 
 # Making the boundaries
 AreaBoundaryDrawer()
@@ -203,6 +263,7 @@ RouterSwitchArea2()
 Area2Connections()
 
 # Doing All Area 3 Work
+RouterSwitchArea3()
 
 # Doing All Area 4 work
 

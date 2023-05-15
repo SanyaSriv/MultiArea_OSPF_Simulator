@@ -255,6 +255,12 @@ def Area3Connections():
     closest_point = (int(router_10_pos[0] + router_radius * math.cos(a)), int(router_10_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
+def RouterSwitchArea4():
+    pass
+
+def Area4Connections():
+    pass
+
 def InterAreaConnections():
     # Router 2 (Area 1) --> Router 5 (Area 2)
     center_box = (router_5_pos[0] - router_radius, router_5_pos[1])
@@ -262,6 +268,14 @@ def InterAreaConnections():
     y = center_box[1] - router_2_pos[1]
     a = math.atan2(y, x)
     closest_point = (int(router_2_pos[0] + router_radius * math.cos(a)), int(router_2_pos[1] + router_radius * math.sin(a)))
+    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+
+    # Router 9 (Area 3) --> Router 8 (Area 2)
+    center_box = (router_8_pos[0] + router_radius, router_8_pos[1])
+    x = center_box[0] - router_9_pos[0]
+    y = center_box[1] - router_9_pos[1]
+    a = math.atan2(y, x)
+    closest_point = (int(router_9_pos[0] + router_radius * math.cos(a)), int(router_9_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
 def AddAnimationButtons():
@@ -292,6 +306,7 @@ RouterSwitchArea3()
 Area3Connections()
 
 # Doing All Area 4 work
+RouterSwitchArea4()
 
 # Making connections between different areas
 InterAreaConnections()

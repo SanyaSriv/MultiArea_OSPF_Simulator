@@ -92,4 +92,5 @@ def SendArea1LSA1(pygame, screen):
     
     for i in list_of_Area_1_triangles:
         i.draw(pygame, screen)
-        i.move_triangle()
+        if (i.move_triangle() == 1):
+            list_of_Area_1_triangles.remove(i) # so we do not have a permanent triangle stattioned on the last router

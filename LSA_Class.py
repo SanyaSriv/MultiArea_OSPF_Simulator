@@ -6,7 +6,7 @@ class LSATriangles:
         self.target = target
         self.color = color
         self.speed = 5
-        self.size = 10
+        self.size = 12
 
         # the triangle should follow this route
         self.full_route = []
@@ -15,8 +15,9 @@ class LSATriangles:
 
     def enable_full_route(self, route):
         self.full_route = route
+        print(self.full_route)
 
-    def move_triangle(self):
+    def move_triangle(self, pygame, screen):
         dx = self.target[0] - self.position[0]
         dy = self.target[1] - self.position[1]
         distance = math.sqrt(dx ** 2 + dy ** 2)
@@ -29,7 +30,6 @@ class LSATriangles:
                 self.position[1] + direction[1] * self.speed
         )
         else:
-            # update the line travelled on
             if (self.current_end == len(self.full_route) - 1):
                 return 1 # nothing more to do, we have finished our work
             self.current_start += 2
@@ -38,7 +38,7 @@ class LSATriangles:
 
     def draw(self, pygame, screen):
         pygame.draw.polygon(
-            screen, (0, 0, 0),
+            screen, self.color,
             [(self.position[0], self.position[1] - self.size),
              (self.position[0] + self.size, self.position[1]),
              (self.position[0], self.position[1] + self.size)]

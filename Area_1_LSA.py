@@ -87,10 +87,90 @@ def initialize_Area1_LSA():
     list_of_Area_1_triangles.append(router_5_t2)
     list_of_Area_1_triangles.append(router_5_t3)
 
+    # ROUTER 3 LSA 1
+    router_3_t1 = LSATriangles(area_1_travel_routes["router_4__TO__router_3"][0],
+                               area_1_travel_routes["router_4__TO__router_3"][1],
+                                (32, 158, 3))
+    router_3_t1.enable_full_route([area_1_travel_routes["router_4__TO__router_3"][0],
+                                   area_1_travel_routes["router_4__TO__router_3"][1],
+                                    area_1_travel_routes["router_5_area_1__TO__router_4"][0],
+                                   area_1_travel_routes["router_5_area_1__TO__router_4"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_1"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_1"][0]])
 
+    router_3_t2 = LSATriangles(area_1_travel_routes["router_4__TO__router_3"][0],
+                               area_1_travel_routes["router_4__TO__router_3"][1],
+                                (32, 158, 3))
+    router_3_t2.enable_full_route([area_1_travel_routes["router_4__TO__router_3"][0],
+                                   area_1_travel_routes["router_4__TO__router_3"][1],
+                                    area_1_travel_routes["router_5_area_1__TO__router_4"][0],
+                                   area_1_travel_routes["router_5_area_1__TO__router_4"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_2"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_2"][0],
+                                   area_1_travel_routes["router_2__TO__router_6"][0],
+                                   area_1_travel_routes["router_2__TO__router_6"][1]])
+    list_of_Area_1_triangles.append(router_3_t1)
+    list_of_Area_1_triangles.append(router_3_t2)
+    
+    # ROUTER 4 LSA 1
+    router_4_t1 = LSATriangles(area_1_travel_routes["router_4__TO__router_3"][1],
+                               area_1_travel_routes["router_4__TO__router_3"][0],
+                                (219, 15, 43))
+    router_4_t1.enable_full_route([area_1_travel_routes["router_4__TO__router_3"][1],
+                                   area_1_travel_routes["router_4__TO__router_3"][0]])
+    
+    router_4_t2 = LSATriangles(area_1_travel_routes["router_5_area_1__TO__router_4"][0],
+                               area_1_travel_routes["router_5_area_1__TO__router_4"][1],
+                                (219, 15, 43))
+    router_4_t2.enable_full_route([area_1_travel_routes["router_5_area_1__TO__router_4"][0],
+                                   area_1_travel_routes["router_5_area_1__TO__router_4"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_1"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_1"][0]])
+    
+    router_4_t3 = LSATriangles(area_1_travel_routes["router_5_area_1__TO__router_4"][0],
+                               area_1_travel_routes["router_5_area_1__TO__router_4"][1],
+                                (219, 15, 43))
+    router_4_t3.enable_full_route([area_1_travel_routes["router_5_area_1__TO__router_4"][0],
+                                   area_1_travel_routes["router_5_area_1__TO__router_4"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_2"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_2"][0],
+                                   area_1_travel_routes["router_2__TO__router_6"][0],
+                                   area_1_travel_routes["router_2__TO__router_6"][1]])
+    
+    list_of_Area_1_triangles.append(router_4_t1)
+    list_of_Area_1_triangles.append(router_4_t2)
+    list_of_Area_1_triangles.append(router_4_t3)
+
+    # ROUTER 6 LSA 1
+    router_6_t1 = LSATriangles(area_1_travel_routes["router_2__TO__router_6"][1],
+                               area_1_travel_routes["router_2__TO__router_6"][0],
+                               (237, 222, 9))
+    router_6_t1.enable_full_route([area_1_travel_routes["router_2__TO__router_6"][1],
+                                   area_1_travel_routes["router_2__TO__router_6"][0],
+                                   area_1_travel_routes["router_5_area_1__TO__router_2"][0],
+                                   area_1_travel_routes["router_5_area_1__TO__router_2"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_1"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_1"][0]])
+
+    router_6_t2 = LSATriangles(area_1_travel_routes["router_2__TO__router_6"][1],
+                               area_1_travel_routes["router_2__TO__router_6"][0],
+                               (237, 222, 9))
+    router_6_t2.enable_full_route([area_1_travel_routes["router_2__TO__router_6"][1],
+                                   area_1_travel_routes["router_2__TO__router_6"][0],
+                                   area_1_travel_routes["router_5_area_1__TO__router_2"][0],
+                                   area_1_travel_routes["router_5_area_1__TO__router_2"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_4"][1],
+                                   area_1_travel_routes["router_5_area_1__TO__router_4"][0],
+                                   area_1_travel_routes["router_4__TO__router_3"][1],
+                                   area_1_travel_routes["router_4__TO__router_3"][0]])
+
+    list_of_Area_1_triangles.append(router_6_t1)
+    list_of_Area_1_triangles.append(router_6_t2)
+
+    
 def SendArea1LSA1(pygame, screen):
     
     for i in list_of_Area_1_triangles:
         i.draw(pygame, screen)
-        if (i.move_triangle() == 1):
+        if (i.move_triangle(pygame, screen) == 1):
             list_of_Area_1_triangles.remove(i) # so we do not have a permanent triangle stattioned on the last router

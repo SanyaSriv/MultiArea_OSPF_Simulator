@@ -7,6 +7,9 @@ class LSATriangles:
         self.color = color
         self.speed = 5
         self.size = 12
+        self.starting_router = None
+        self.router_path_names = []
+        self.hop_count_number = 0
 
         # the triangle should follow this route
         self.full_route = []
@@ -22,7 +25,8 @@ class LSATriangles:
         dy = self.target[1] - self.position[1]
         distance = math.sqrt(dx ** 2 + dy ** 2)
         direction = (dx / distance, dy / distance)
-    
+
+        to_ret = None
         # Update triangle position
         if distance > self.speed:
             self.position = (
@@ -30,12 +34,18 @@ class LSATriangles:
                 self.position[1] + direction[1] * self.speed
         )
         else:
+            print("the hop count is: ", self.hop_count_number)
+            to_ret = self.router_path_names[self.hop_count_number] 
+            self.hop_count_number += 1 # we switch paths
+
             if (self.current_end == len(self.full_route) - 1):
-                return 1 # nothing more to do, we have finished our work
+                return (to_ret, self.starting_router, 1) # nothing more to do, we have finished our work
             self.current_start += 2
             self.current_end += 2
             self.update_position(self.full_route[self.current_start], self.full_route[self.current_end])
 
+        return (to_ret, self.starting_router, 0)
+    
     def draw(self, pygame, screen):
         pygame.draw.polygon(
             screen, self.color,
@@ -48,3 +58,8 @@ class LSATriangles:
         self.target = new_target
         self.position = new_position
 
+    def update_starting_router(self, start_router_name):
+        self.starting_router = start_router_name
+
+    def update_router_path_names(self, router_hop_name_list):
+        self.router_path_names = router_hop_name_list

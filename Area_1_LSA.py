@@ -222,6 +222,7 @@ def SendArea1LSA1(pygame, screen):
     
     global router_1_text, router_2_text, router_3_text, router_4_text, router_5_text, router_6_text
     global text_dictionary_LSA_1
+    global list_text_position
 
     font = pygame.font.Font(None, 14)
 
@@ -267,3 +268,10 @@ def SendArea1LSA1(pygame, screen):
         text = font.render(i[0], True, (0, 0, 0))
         screen.blit(text, (i[1][0], i[1][1]))
 
+
+def erase_text():
+    global text_dictionary_LSA_1
+    global list_text_position
+
+    text_dictionary_LSA_1 = {}
+    list_text_position = []

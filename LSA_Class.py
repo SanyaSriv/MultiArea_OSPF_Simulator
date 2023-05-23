@@ -1,11 +1,13 @@
 import math
 
 class LSATriangles:
+    shared_speed = 5
+
     def __init__(self, position, target, color):
         self.position = position
         self.target = target
         self.color = color
-        self.speed = 5
+        self.speed = LSATriangles.shared_speed
         self.size = 12
         self.starting_router = None
         self.router_path_names = []

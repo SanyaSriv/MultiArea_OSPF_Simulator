@@ -335,11 +335,18 @@ def InterAreaConnections():
 def AddAnimationButtons():
     # Button for sending LSA 1s
     pygame.draw.rect(screen, (31, 128, 48), (button_LSA_1_pos[0], button_LSA_1_pos[1], button_width, button_height))
-
+    pygame.draw.rect(screen, (31, 128, 48), (button_LSA_1_refresh[0], button_LSA_1_refresh[1], button_width, button_height))
     font = pygame.font.SysFont('Arial', 12)
+
     text_1 = font.render('Send LSA 1', True, (0, 0, 0))
+    text_2 = font.render('Clear LSA1 text', True, (0, 0, 0))
+
     text_pos_switch = ((button_width - font.size('Send LSA 1')[0]) // 2, (button_height - font.size('Send LSA 1')[1]) // 2)
     screen.blit(text_1, (button_LSA_1_pos[0] + text_pos_switch[0], button_LSA_1_pos[1] + text_pos_switch[1]))
+
+    text_pos_switch = ((button_width - font.size('Clear LSA1 text')[0]) // 2, (button_height - font.size('Clear LSA1 text')[1]) // 2)
+    screen.blit(text_2, (button_LSA_1_refresh[0] + text_pos_switch[0], button_LSA_1_refresh[1] + text_pos_switch[1]))
+
 
 # Adding the animation buttons
 
@@ -362,12 +369,23 @@ while running:
     
     if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
+
+            # if the SEND_LSA_1 button gets clicked
             if (button_LSA_1_pos[0] < mouse_pos[0] < button_LSA_1_pos[0] + button_width) and \
                (button_LSA_1_pos[1] < mouse_pos[1] < button_LSA_1_pos[1] + button_height):
                 # global_variables_file.triangle_pos = area_1_travel_routes["router_5_area_1__TO__router_1"][0]
                 # global_variables_file.triangle_target = area_1_travel_routes["router_5_area_1__TO__router_1"][1]
-                Area_1_LSA.initialize_Area1_LSA()
-                res = 1
+                if res != 1:
+                    Area_1_LSA.initialize_Area1_LSA()
+                    res = 1
+            
+            if (button_LSA_1_refresh[0] < mouse_pos[0] < button_LSA_1_refresh[0] + button_width) and \
+               (button_LSA_1_refresh[1] < mouse_pos[1] < button_LSA_1_refresh[1] + button_height):
+                # TODO: If we set res = 0 in here, then the text dissapears but the LSA 1 sending process stops
+                # to not stop the process while clearing the text, set res = 0 by some other button
+                res = 0
+                Area_1_LSA.erase_text()
+
     # Making the boundaries
     AreaBoundaryDrawer()
 

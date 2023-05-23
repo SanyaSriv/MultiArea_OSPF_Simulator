@@ -10,6 +10,7 @@ button_width = 100
 button_height = 30
 button_color = (255, 0, 0)
 button_LSA_1_pos = (20, 20)
+button_LSA_1_refresh = (130, 20)
 
 # Router and Switch
 box_size = 80

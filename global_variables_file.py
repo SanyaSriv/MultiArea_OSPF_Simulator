@@ -12,6 +12,16 @@ button_color = (255, 0, 0)
 button_LSA_1_pos = (20, 20)
 button_LSA_1_refresh = (130, 20)
 
+# For sliders
+slider_width = 70
+slider_height = 20
+slider_handle_width = 9
+slider_position = (280, 20)
+speed_slider_min_value = 0
+speed_slider_max_value = 150
+speed_slider_current_value = 50
+
+
 # Router and Switch
 box_size = 80
 switch_size = 50

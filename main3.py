@@ -3,7 +3,7 @@ import math
 import global_variables_file
 from global_variables_file import *
 import Area_1_LSA
-
+import LSA_Class
 # Initialize Pygame
 pygame.init()
 
@@ -347,6 +347,10 @@ def AddAnimationButtons():
     text_pos_switch = ((button_width - font.size('Clear LSA1 text')[0]) // 2, (button_height - font.size('Clear LSA1 text')[1]) // 2)
     screen.blit(text_2, (button_LSA_1_refresh[0] + text_pos_switch[0], button_LSA_1_refresh[1] + text_pos_switch[1]))
 
+    # making the slider here
+    pygame.draw.rect(screen, (0,0,0), (slider_position[0], slider_position[1], slider_width, slider_height))
+    slider_handle_x = slider_position[0] + 1 + (speed_slider_current_value - speed_slider_min_value) / (speed_slider_max_value - speed_slider_min_value) * slider_width
+    pygame.draw.rect(screen, (230, 120, 89), (slider_handle_x, slider_position[1], slider_handle_width, slider_height))
 
 # Adding the animation buttons
 
@@ -360,6 +364,8 @@ pygame.display.flip()
 # Run the game loop
 running = True
 res = 0
+speed_slider_dragging = 0
+
 while running:
     screen.fill((255,255,255))
     # Handle events
@@ -368,8 +374,11 @@ while running:
             running = False
     
     if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.button == 1:  # Left mouse button
             mouse_pos = pygame.mouse.get_pos()
-
+            if slider_position[0] <= mouse_pos[0] <= slider_position[0] + slider_width and slider_position[1] <= mouse_pos[1] <= slider_position[1] + slider_height:
+                speed_slider_dragging = True
+            
             # if the SEND_LSA_1 button gets clicked
             if (button_LSA_1_pos[0] < mouse_pos[0] < button_LSA_1_pos[0] + button_width) and \
                (button_LSA_1_pos[1] < mouse_pos[1] < button_LSA_1_pos[1] + button_height):
@@ -385,6 +394,18 @@ while running:
                 # to not stop the process while clearing the text, set res = 0 by some other button
                 res = 0
                 Area_1_LSA.erase_text()
+
+    # elif event.type == pygame.MOUSEBUTTONUP:
+    #     if event.button == 1:  # Left mouse button
+    #         speed_slider_dragging = False
+    #         LSA_Class.LSATriangles.shared_speed = int(speed_slider_current_value / 50)
+
+    # elif event.type == pygame.MOUSEMOTION:
+    #     if speed_slider_dragging == True:
+    #         mouse_pos = pygame.mouse.get_pos()
+    #         normalized_x = (mouse_pos[0] - slider_position[0]) / slider_width
+    #         current_value = speed_slider_min_value + int(normalized_x * (speed_slider_max_value - speed_slider_min_value))
+    #         speed_slider_current_value = max(speed_slider_min_value, min(current_value, speed_slider_max_value))
 
     # Making the boundaries
     AreaBoundaryDrawer()

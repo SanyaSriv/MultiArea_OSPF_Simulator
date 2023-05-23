@@ -65,3 +65,6 @@ class LSATriangles:
 
     def update_router_path_names(self, router_hop_name_list):
         self.router_path_names = router_hop_name_list
+
+    def change_speed(self, new_speed):
+        LSATriangles.shared_speed = new_speed

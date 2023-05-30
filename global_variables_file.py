@@ -39,6 +39,7 @@ router_5_pos_area_1 = (195, 375)
 router_6_pos_area_1 = (355, 500)
 
 area_1_travel_routes = {}
+area_2_travel_routes = {}
 
 # Position of all the area boundaries
 area_1_pos = (20, 200)
@@ -47,24 +48,24 @@ area_3_pos = (1010, 100) # area 3
 area_4_pos = (1010, 420) # area 4
 
 # Position of all Area 2 Routers (There would be 3 routers (I am thinking))
-router_5_pos = (610, 150)
-router_6_pos = (610, 290)
-router_7_pos = (610,430)
-router_8_pos = (740, 290)
+router_7_pos = (610, 150)
+router_8_pos = (610, 290)
+router_9_pos = (610,430)
+router_10_pos = (740, 290)
 
 # Position of all Area 3 Routers and switches
-router_9_pos = (1070, 150)
-router_10_pos = (1070, 300)
-router_11_pos = (1270, 150)
+router_11_pos = (1070, 150)
+router_12_pos = (1070, 300)
+router_13_pos = (1270, 150)
 
 switch_3_pos = (1245, 275)
 
 # Position of all Area 4 Routers and switches
-router_12_pos = (1070, 600)
-router_13_pos = (1070, 470)
-router_14_pos = (1200, 600)
-router_15_pos = (1200, 470)
-router_16_pos = (1320, 600)
+router_14_pos = (1070, 600)
+router_15_pos = (1070, 470)
+router_16_pos = (1200, 600)
+router_17_pos = (1200, 470)
+router_18_pos = (1320, 600)
 
 switch_4_pos = (1295, 445)
 

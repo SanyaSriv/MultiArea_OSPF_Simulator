@@ -9,8 +9,12 @@ line = 0
 button_width = 100
 button_height = 30
 button_color = (255, 0, 0)
+
 button_LSA_1_pos = (20, 20)
 button_LSA_1_refresh = (130, 20)
+
+button_LSA_3_pos = (20, 70)
+button_LSA_3_refresh = (130, 70)
 
 # For sliders
 slider_width = 70
@@ -40,6 +44,7 @@ router_6_pos_area_1 = (355, 500)
 
 area_1_travel_routes = {}
 area_2_travel_routes = {}
+inter_area_routes = {}
 
 # Position of all the area boundaries
 area_1_pos = (20, 200)

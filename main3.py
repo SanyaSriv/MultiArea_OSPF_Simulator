@@ -4,6 +4,8 @@ import global_variables_file
 from global_variables_file import *
 import Area_1_LSA
 import Area_2_LSA
+import Area_1_LSA_3
+import Area_2_LSA_3
 import LSA_Class
 # Initialize Pygame
 pygame.init()
@@ -309,6 +311,7 @@ def InterAreaConnections():
     closest_point = (int(router_2_pos[0] + router_radius * math.cos(a)), int(router_2_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
+    inter_area_routes["router_2__TO__router_7"] = [closest_point, center_box]
     # TODO: FIX THIS 
     # # Router 9 (Area 3) --> Switch 5 (Area 2)
     # center_box = (switch_5_pos[0] + switch_size // 2, switch_5_pos[1])
@@ -342,10 +345,23 @@ def AddAnimationButtons():
     text_pos_switch = ((button_width - font.size('Clear LSA1 text')[0]) // 2, (button_height - font.size('Clear LSA1 text')[1]) // 2)
     screen.blit(text_2, (button_LSA_1_refresh[0] + text_pos_switch[0], button_LSA_1_refresh[1] + text_pos_switch[1]))
 
-    # making the slider here
-    pygame.draw.rect(screen, (0,0,0), (slider_position[0], slider_position[1], slider_width, slider_height))
-    slider_handle_x = slider_position[0] + 1 + (speed_slider_current_value - speed_slider_min_value) / (speed_slider_max_value - speed_slider_min_value) * slider_width
-    pygame.draw.rect(screen, (230, 120, 89), (slider_handle_x, slider_position[1], slider_handle_width, slider_height))
+    # making the slider here --> commenting out the slider for now
+    # pygame.draw.rect(screen, (0,0,0), (slider_position[0], slider_position[1], slider_width, slider_height))
+    # slider_handle_x = slider_position[0] + 1 + (speed_slider_current_value - speed_slider_min_value) / (speed_slider_max_value - speed_slider_min_value) * slider_width
+    # pygame.draw.rect(screen, (230, 120, 89), (slider_handle_x, slider_position[1], slider_handle_width, slider_height))
+
+    # Buttons for LSA 3
+    pygame.draw.rect(screen, (31, 128, 48), (button_LSA_3_pos[0], button_LSA_3_pos[1], button_width, button_height))
+    pygame.draw.rect(screen, (31, 128, 48), (button_LSA_3_refresh[0], button_LSA_3_refresh[1], button_width, button_height))
+
+    text_3 = font.render('Send LSA 3', True, (0, 0, 0))
+    text_4 = font.render('Clear LSA3 text', True, (0, 0, 0))
+
+    text_pos_switch = ((button_width - font.size('Send LSA 3')[0]) // 2, (button_height - font.size('Send LSA 3')[1]) // 2)
+    screen.blit(text_3, (button_LSA_3_pos[0] + text_pos_switch[0], button_LSA_3_pos[1] + text_pos_switch[1]))
+
+    text_pos_switch = ((button_width - font.size('Clear LSA3 text')[0]) // 2, (button_height - font.size('Clear LSA3 text')[1]) // 2)
+    screen.blit(text_4, (button_LSA_3_refresh[0] + text_pos_switch[0], button_LSA_3_refresh[1] + text_pos_switch[1]))
 
 # Adding the animation buttons
 
@@ -358,7 +374,10 @@ pygame.display.flip()
 
 # Run the game loop
 running = True
-res = 0
+
+LSA_1_trigger = 0
+LSA_3_trigger = 0
+
 speed_slider_dragging = 0
 
 while running:
@@ -379,18 +398,36 @@ while running:
                (button_LSA_1_pos[1] < mouse_pos[1] < button_LSA_1_pos[1] + button_height):
                 # global_variables_file.triangle_pos = area_1_travel_routes["router_5_area_1__TO__router_1"][0]
                 # global_variables_file.triangle_target = area_1_travel_routes["router_5_area_1__TO__router_1"][1]
-                if res != 1:
+                if LSA_1_trigger != 1:
                     Area_1_LSA.initialize_Area1_LSA()
                     Area_2_LSA.initialize_Area2_LSA()
-                    res = 1
+                    LSA_1_trigger = 1
             
             if (button_LSA_1_refresh[0] < mouse_pos[0] < button_LSA_1_refresh[0] + button_width) and \
                (button_LSA_1_refresh[1] < mouse_pos[1] < button_LSA_1_refresh[1] + button_height):
-                # TODO: If we set res = 0 in here, then the text dissapears but the LSA 1 sending process stops
-                # to not stop the process while clearing the text, set res = 0 by some other button
-                res = 0
+                # TODO: If we set LSA_1_trigger = 0 in here, then the text dissapears but the LSA 1 sending process stops
+                # to not stop the process while clearing the text, set LSA_1_trigger = 0 by some other button
+                LSA_1_trigger = 0
                 Area_1_LSA.erase_text()
                 Area_2_LSA.erase_text()
+
+            # if the SEND_LSA_3 button gets clicked
+            if (button_LSA_3_pos[0] < mouse_pos[0] < button_LSA_3_pos[0] + button_width) and \
+               (button_LSA_3_pos[1] < mouse_pos[1] < button_LSA_3_pos[1] + button_height):
+                # global_variables_file.triangle_pos = area_1_travel_routes["router_5_area_1__TO__router_1"][0]
+                # global_variables_file.triangle_target = area_1_travel_routes["router_5_area_1__TO__router_1"][1]
+                if LSA_3_trigger != 1:
+                    Area_1_LSA_3.initialize_Area1_LSA()
+                    Area_2_LSA_3.initialize_Area2_LSA()
+                    LSA_3_trigger = 1
+            
+            if (button_LSA_3_refresh[0] < mouse_pos[0] < button_LSA_3_refresh[0] + button_width) and \
+               (button_LSA_3_refresh[1] < mouse_pos[1] < button_LSA_3_refresh[1] + button_height):
+                # TODO: If we set LSA_1_trigger = 0 in here, then the text dissapears but the LSA 1 sending process stops
+                # to not stop the process while clearing the text, set LSA_1_trigger = 0 by some other button
+                LSA_3_trigger = 0
+                Area_1_LSA_3.erase_text()
+                Area_2_LSA_3.erase_text()
 
     # elif event.type == pygame.MOUSEBUTTONUP:
     #     if event.button == 1:  # Left mouse button
@@ -426,11 +463,14 @@ while running:
     # Making connections between different areas
     InterAreaConnections()
     AddAnimationButtons()
-    if res == 1:
+    if LSA_1_trigger == 1:
         Area_1_LSA.SendArea1LSA1(pygame, screen)
         Area_2_LSA.SendArea2LSA1(pygame, screen)
-        # figure out some way to put res as 0
-        
+        # figure out some way to put LSA_1_trigger as 0
+    
+    if LSA_3_trigger == 1:
+        Area_1_LSA_3.SendArea1LSA3(pygame, screen)
+        Area_2_LSA_3.SendArea2LSA3(pygame, screen)
     # Update the screen
     pygame.display.flip()
     clock.tick(10)

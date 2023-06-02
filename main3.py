@@ -331,6 +331,20 @@ def InterAreaConnections():
 
 
 def AddAnimationButtons():
+    # Button to control the master simulation: which will do everything
+    pygame.draw.rect(screen, master_button_color, (master_simulator[0], master_simulator[1], master_button_width, button_height))
+    pygame.draw.rect(screen, master_button_color, (master_simulator_refresh[0], master_simulator_refresh[1], master_button_width, button_height))
+    font = pygame.font.SysFont('Arial', 12)
+
+    text_1 = font.render('Master Simulation', True, (0, 0, 0))
+    text_2 = font.render('Clear Master Simulation', True, (0, 0, 0))
+
+    text_pos_switch = ((master_button_width - font.size('Master Simulation')[0]) // 2, (button_height - font.size('Master Simulation')[1]) // 2)
+    screen.blit(text_1, (master_simulator[0] + text_pos_switch[0], master_simulator[1] + text_pos_switch[1]))
+
+    text_pos_switch = ((master_button_width - font.size('Clear Master Simulation')[0]) // 2, (button_height - font.size('Clear Master Simulation')[1]) // 2)
+    screen.blit(text_2, (master_simulator_refresh[0] + text_pos_switch[0], master_simulator_refresh[1] + text_pos_switch[1]))
+
     # Button for sending LSA 1s
     pygame.draw.rect(screen, (31, 128, 48), (button_LSA_1_pos[0], button_LSA_1_pos[1], button_width, button_height))
     pygame.draw.rect(screen, (31, 128, 48), (button_LSA_1_refresh[0], button_LSA_1_refresh[1], button_width, button_height))
@@ -377,6 +391,8 @@ running = True
 
 LSA_1_trigger = 0
 LSA_3_trigger = 0
+master_simulation_trigger = 0
+switch  = 1 # we start with LSA 1
 
 speed_slider_dragging = 0
 
@@ -414,8 +430,6 @@ while running:
             # if the SEND_LSA_3 button gets clicked
             if (button_LSA_3_pos[0] < mouse_pos[0] < button_LSA_3_pos[0] + button_width) and \
                (button_LSA_3_pos[1] < mouse_pos[1] < button_LSA_3_pos[1] + button_height):
-                # global_variables_file.triangle_pos = area_1_travel_routes["router_5_area_1__TO__router_1"][0]
-                # global_variables_file.triangle_target = area_1_travel_routes["router_5_area_1__TO__router_1"][1]
                 if LSA_3_trigger != 1:
                     Area_1_LSA_3.initialize_Area1_LSA()
                     Area_2_LSA_3.initialize_Area2_LSA()
@@ -423,11 +437,34 @@ while running:
             
             if (button_LSA_3_refresh[0] < mouse_pos[0] < button_LSA_3_refresh[0] + button_width) and \
                (button_LSA_3_refresh[1] < mouse_pos[1] < button_LSA_3_refresh[1] + button_height):
-                # TODO: If we set LSA_1_trigger = 0 in here, then the text dissapears but the LSA 1 sending process stops
-                # to not stop the process while clearing the text, set LSA_1_trigger = 0 by some other button
                 LSA_3_trigger = 0
                 Area_1_LSA_3.erase_text()
                 Area_2_LSA_3.erase_text()
+
+            
+            # if the master_simulation button gets clicked
+            if (master_simulator[0] < mouse_pos[0] < master_simulator[0] + master_button_width) and \
+               (master_simulator[1] < mouse_pos[1] < master_simulator[1] + button_height):
+                # ONE IDEA is to combiene all the LSA 3 files in 1 so we can reuse the positions
+                if master_simulation_trigger != 1:
+                    # doing LSA 1 initializations
+                    Area_1_LSA.initialize_Area1_LSA()
+                    Area_2_LSA.initialize_Area2_LSA()
+                    
+                    # doing Area 3 initializations
+                    Area_1_LSA_3.initialize_Area1_LSA()
+                    Area_2_LSA_3.initialize_Area2_LSA()
+                    master_simulation_trigger = 1
+            
+            if (master_simulator_refresh[0] < mouse_pos[0] < master_simulator_refresh[0] + master_button_width) and \
+               (master_simulator_refresh[1] < mouse_pos[1] < master_simulator_refresh[1] + button_height):
+                # TODO: we can remove this: it is un-needed
+                master_simulation_trigger = 0
+                # erase the last LSA (for now it is LSA 3)
+                Area_1_LSA_3.erase_text()
+                Area_2_LSA_3.erase_text()
+
+            
 
     # elif event.type == pygame.MOUSEBUTTONUP:
     #     if event.button == 1:  # Left mouse button
@@ -464,13 +501,36 @@ while running:
     InterAreaConnections()
     AddAnimationButtons()
     if LSA_1_trigger == 1:
-        Area_1_LSA.SendArea1LSA1(pygame, screen)
+        Area_1_LSA.SendArea1LSA1(pygame, screen) # figure out a way to know if all of this is complete or we would have to go all in manually
         Area_2_LSA.SendArea2LSA1(pygame, screen)
         # figure out some way to put LSA_1_trigger as 0
     
     if LSA_3_trigger == 1:
         Area_1_LSA_3.SendArea1LSA3(pygame, screen)
         Area_2_LSA_3.SendArea2LSA3(pygame, screen)
+    
+    if master_simulation_trigger == 1:
+        if switch == 1:
+            r1 = Area_1_LSA.SendArea1LSA1(pygame, screen)
+            r2 = Area_2_LSA.SendArea2LSA1(pygame, screen)
+            if (r1 == 1 and r2 == 1):
+                    switch = 3 # switch to LSA 3
+                    # but also clear the data that was displayed because of LSA 1
+                    Area_1_LSA.erase_text()
+                    Area_2_LSA.erase_text()
+                    # TODO: Maybe display a text in here that LSA 1 is not complete
+        elif switch == 3:
+            r1 = Area_1_LSA_3.SendArea1LSA3(pygame, screen)
+            r2 = Area_2_LSA_3.SendArea2LSA3(pygame, screen)
+            if (r1 == 1 and r2 == 1):
+                switch = 4 # switch to LSA 3
+                # but also clear the data that was displayed because of LSA 1
+                Area_1_LSA_3.erase_text()
+                Area_2_LSA_3.erase_text()
+        elif switch == 4:
+            master_simulation_trigger = 0 # because we have no more LSAs to send right now
+            switch = 1 # reset
+
     # Update the screen
     pygame.display.flip()
     clock.tick(10)

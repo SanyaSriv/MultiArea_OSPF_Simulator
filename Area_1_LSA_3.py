@@ -101,6 +101,10 @@ def SendArea1LSA3(pygame, screen):
         text = font.render(i[0], True, (0, 0, 0))
         screen.blit(text, (i[1][0], i[1][1]))
 
+    if list_of_Area_1_triangles == []:
+        return 1 # complete
+    
+    return 0 # in progress
 
 def erase_text():
     global text_dictionary_LSA_3

@@ -49,6 +49,7 @@ router_6_pos_area_1 = (355, 500)
 
 area_1_travel_routes = {}
 area_2_travel_routes = {}
+area_3_travel_routes = {}
 inter_area_routes = {}
 
 # Position of all the area boundaries
@@ -67,11 +68,10 @@ router_10_pos = (740, 290)
 router_11_pos = (1070, 150)
 router_12_pos = (1070, 300)
 router_13_pos = (1270, 150)
-
-switch_3_pos = (1245, 275)
+router_14_pos = (1270, 300)
+switch_3_pos = (1225, 275)
 
 # Position of all Area 4 Routers and switches
-router_14_pos = (1070, 600)
 router_15_pos = (1070, 470)
 router_16_pos = (1200, 600)
 router_17_pos = (1200, 470)

@@ -117,26 +117,20 @@ def RouterSwitchArea2():
     pygame.draw.circle(screen, (159, 173, 191), (router_9_pos[0], router_9_pos[1]), router_radius)
     pygame.draw.circle(screen, (159, 173, 191), (router_10_pos[0], router_10_pos[1]), router_radius)
 
-    pygame.draw.rect(screen, (222, 146, 146), (switch_5_pos[0], switch_5_pos[1], switch_size, switch_size))
-
      # Render text to display inside each box
     font = pygame.font.SysFont('Arial', 12)
     text_1 = font.render('Router 7', True, (0, 0, 0))
     text_2 = font.render('Router 8', True, (0, 0, 0))
     text_3 = font.render('Router 9', True, (0, 0, 0))
     text_4 = font.render('Router 10', True, (0, 0, 0))
-    text_5 = font.render('Switch 5', True, (0, 0, 0))
 
     # Calculate the position to display the text in the center of each box
     text_pos = ((box_size - font.size('Router 1')[0]) // 2, (box_size - font.size('Router 1')[1]) // 2)
-    text_pos_switch = ((switch_size - font.size('Switch 5')[0]) // 2, (switch_size - font.size('Switch 5')[1]) // 2)
 
     screen.blit(text_1, text_1.get_rect(center=router_7_pos))
     screen.blit(text_2, text_2.get_rect(center=router_8_pos))
     screen.blit(text_3, text_3.get_rect(center=router_9_pos))
     screen.blit(text_4, text_4.get_rect(center=router_10_pos))
-
-    screen.blit(text_5, (switch_5_pos[0] + text_pos_switch[0], switch_5_pos[1] + text_pos_switch[1]))
 
 def Area2Connections():
     # router 7 --> router 8
@@ -175,14 +169,6 @@ def Area2Connections():
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
     area_2_travel_routes["router_9__TO__router_10"] = [center_box, closest_point]
 
-    # Router 10 --> Switch 5
-    center_box = (switch_5_pos[0], switch_5_pos[1] + switch_size // 2)
-    x = center_box[0] - router_10_pos[0]
-    y = center_box[1] - router_10_pos[1]
-    a = math.atan2(y, x)
-    closest_point = (int(router_10_pos[0] + router_radius * math.cos(a)), int(router_10_pos[1] + router_radius * math.sin(a)))
-    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
- 
 def RouterSwitchArea3():
     # 9, 10, 11 --> 11, 12, 13
     pygame.draw.circle(screen, (159, 173, 191), (router_11_pos[0], router_11_pos[1]), router_radius)

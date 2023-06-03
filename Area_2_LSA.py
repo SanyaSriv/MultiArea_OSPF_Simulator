@@ -18,6 +18,7 @@ list_text_position_area_2 = []
 def initialize_Area2_LSA():
     global router_7_text, router_8_text, router_9_text, router_10_text
     global list_text_position_area_2, text_dictionary_LSA_1_area_2
+    global list_of_Area_2_triangles
 
     # initialize all the text positions
     router_7_text = [630, 130, 1]
@@ -27,6 +28,7 @@ def initialize_Area2_LSA():
 
     list_text_position_area_2 = []
     text_dictionary_LSA_1_area_2 = {}
+    list_of_Area_2_triangles = []
 
     # ROUTER 7 LSA 1
     router_7_t1 = LSATriangles(area_2_travel_routes["router_7__TO__router_8"][0],
@@ -176,6 +178,8 @@ def SendArea2LSA1(pygame, screen):
 def erase_text():
     global text_dictionary_LSA_1_area_2
     global list_text_position_area_2
+    global list_of_Area_2_triangles
 
+    list_of_Area_2_triangles = []
     text_dictionary_LSA_1_area_2 = {}
     list_text_position_area_2 = []

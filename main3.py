@@ -4,6 +4,7 @@ import global_variables_file
 from global_variables_file import *
 import Area_1_LSA
 import Area_2_LSA
+import Area_3_LSA
 import Area_1_LSA_3
 import Area_2_LSA_3
 import LSA_Class
@@ -418,6 +419,7 @@ while running:
                 if LSA_1_trigger != 1:
                     Area_1_LSA.initialize_Area1_LSA()
                     Area_2_LSA.initialize_Area2_LSA()
+                    Area_3_LSA.initialize_Area3_LSA()
                     LSA_1_trigger = 1
             
             if (button_LSA_1_refresh[0] < mouse_pos[0] < button_LSA_1_refresh[0] + button_width) and \
@@ -427,6 +429,7 @@ while running:
                 LSA_1_trigger = 0
                 Area_1_LSA.erase_text()
                 Area_2_LSA.erase_text()
+                Area_3_LSA.erase_text()
 
             # if the SEND_LSA_3 button gets clicked
             if (button_LSA_3_pos[0] < mouse_pos[0] < button_LSA_3_pos[0] + button_width) and \
@@ -451,6 +454,7 @@ while running:
                     # doing LSA 1 initializations
                     Area_1_LSA.initialize_Area1_LSA()
                     Area_2_LSA.initialize_Area2_LSA()
+                    Area_3_LSA.initialize_Area3_LSA()
                     
                     # doing Area 3 initializations
                     Area_1_LSA_3.initialize_Area1_LSA()
@@ -504,6 +508,7 @@ while running:
     if LSA_1_trigger == 1:
         Area_1_LSA.SendArea1LSA1(pygame, screen) # figure out a way to know if all of this is complete or we would have to go all in manually
         Area_2_LSA.SendArea2LSA1(pygame, screen)
+        Area_3_LSA.SendArea3LSA1(pygame, screen)
         # figure out some way to put LSA_1_trigger as 0
     
     if LSA_3_trigger == 1:
@@ -514,11 +519,14 @@ while running:
         if switch == 1:
             r1 = Area_1_LSA.SendArea1LSA1(pygame, screen)
             r2 = Area_2_LSA.SendArea2LSA1(pygame, screen)
-            if (r1 == 1 and r2 == 1):
+            r3 = Area_3_LSA.SendArea3LSA1(pygame, screen)
+            # Add for area 3 in here
+            if (r1 == 1 and r2 == 1 and r3 == 1):
                     switch = 3 # switch to LSA 3
                     # but also clear the data that was displayed because of LSA 1
                     Area_1_LSA.erase_text()
                     Area_2_LSA.erase_text()
+                    Area_3_LSA.erase_text()
                     # TODO: Maybe display a text in here that LSA 1 is not complete
         elif switch == 3:
             r1 = Area_1_LSA_3.SendArea1LSA3(pygame, screen)

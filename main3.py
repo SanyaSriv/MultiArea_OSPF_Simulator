@@ -8,6 +8,8 @@ import Area_3_LSA
 import Area_1_LSA_3
 import Area_2_LSA_3
 import LSA_Class
+import Area_LSA_4
+
 # Initialize Pygame
 pygame.init()
 
@@ -398,6 +400,18 @@ def AddAnimationButtons():
     text_pos_switch = ((button_width - font.size('Clear LSA3 text')[0]) // 2, (button_height - font.size('Clear LSA3 text')[1]) // 2)
     screen.blit(text_4, (button_LSA_3_refresh[0] + text_pos_switch[0], button_LSA_3_refresh[1] + text_pos_switch[1]))
 
+    # Buttons for sending LSA 4
+    pygame.draw.rect(screen, (31, 128, 48), (button_LSA_4_pos[0], button_LSA_4_pos[1], button_width, button_height))
+    pygame.draw.rect(screen, (31, 128, 48), (button_LSA_4_refresh[0], button_LSA_4_refresh[1], button_width, button_height))
+
+    text_3 = font.render('Send LSA 4', True, (0, 0, 0))
+    text_4 = font.render('Clear LSA4 text', True, (0, 0, 0))
+
+    text_pos_switch = ((button_width - font.size('Send LSA 4')[0]) // 2, (button_height - font.size('Send LSA 4')[1]) // 2)
+    screen.blit(text_3, (button_LSA_4_pos[0] + text_pos_switch[0], button_LSA_4_pos[1] + text_pos_switch[1]))
+
+    text_pos_switch = ((button_width - font.size('Clear LSA3 text')[0]) // 2, (button_height - font.size('Clear LSA3 text')[1]) // 2)
+    screen.blit(text_4, (button_LSA_4_refresh[0] + text_pos_switch[0], button_LSA_4_refresh[1] + text_pos_switch[1]))
 # Adding the animation buttons
 
 
@@ -412,6 +426,8 @@ running = True
 
 LSA_1_trigger = 0
 LSA_3_trigger = 0
+LSA_4_trigger = 0
+
 master_simulation_trigger = 0
 switch  = 1 # we start with LSA 1
 
@@ -466,6 +482,19 @@ while running:
                 Area_1_LSA_3.erase_text_area_1()
                 Area_1_LSA_3.erase_text_area_2()
                 Area_1_LSA_3.erase_text_area_3()
+
+             # if the SEND_LSA_4 button gets clicked
+            if (button_LSA_4_pos[0] < mouse_pos[0] < button_LSA_4_pos[0] + button_width) and \
+               (button_LSA_4_pos[1] < mouse_pos[1] < button_LSA_4_pos[1] + button_height):
+                if LSA_4_trigger != 1:
+                    Area_LSA_4.initialize_common_variables()
+                    Area_LSA_4.initialize_LSA_4_routes()
+                    LSA_4_trigger = 1
+            
+            if (button_LSA_4_refresh[0] < mouse_pos[0] < button_LSA_4_refresh[0] + button_width) and \
+               (button_LSA_4_refresh[1] < mouse_pos[1] < button_LSA_4_refresh[1] + button_height):
+                LSA_4_trigger = 0
+                Area_LSA_4.erase_LSA_4_text()
 
             
             # if the master_simulation button gets clicked
@@ -538,6 +567,9 @@ while running:
         Area_1_LSA_3.SendArea1LSA3(pygame, screen)
         Area_1_LSA_3.SendArea2LSA3(pygame, screen)
         Area_1_LSA_3.SendArea3LSA3(pygame, screen)
+
+    if LSA_4_trigger == 1:
+        Area_LSA_4.Send_LSA_4(pygame, screen)
     
     if master_simulation_trigger == 1:
         if switch == 1:

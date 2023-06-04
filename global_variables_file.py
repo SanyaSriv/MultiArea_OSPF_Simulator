@@ -16,6 +16,9 @@ button_LSA_1_refresh = (130, 20)
 button_LSA_3_pos = (20, 70)
 button_LSA_3_refresh = (130, 70)
 
+button_LSA_4_pos = (260, 20)
+button_LSA_4_refresh = (370, 20)
+
 master_button_width = 150
 master_button_color = (217, 215, 98)
 master_simulator = (20, 120)

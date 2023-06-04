@@ -12,6 +12,7 @@ import LSA_Class
 pygame.init()
 
 # Set up the window
+# TODO: Make Area 3 a STUB AREA
 
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("OSPF Simulator")
@@ -305,6 +306,7 @@ def InterAreaConnections():
     a = math.atan2(y, x)
     closest_point = (int(router_11_pos[0] + router_radius * math.cos(a)), int(router_11_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+    inter_area_routes["router_10__TO__router_11"] = [center_box, closest_point]
 
     # Router 10 (Area 2) --> Router 15 (Area 4)
     center_box = (router_10_pos[0] + router_radius, router_10_pos[1])
@@ -313,6 +315,7 @@ def InterAreaConnections():
     a = math.atan2(y, x)
     closest_point = (int(router_15_pos[0] + router_radius * math.cos(a)), int(router_15_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+    inter_area_routes["router_10__TO__router__15"] = [center_box, closest_point]
 
     # TODO: FIX THIS 
     # # Router 9 (Area 3) --> Switch 5 (Area 2)
@@ -435,15 +438,18 @@ while running:
             if (button_LSA_3_pos[0] < mouse_pos[0] < button_LSA_3_pos[0] + button_width) and \
                (button_LSA_3_pos[1] < mouse_pos[1] < button_LSA_3_pos[1] + button_height):
                 if LSA_3_trigger != 1:
+                    Area_1_LSA_3.initialize_common_variables()
                     Area_1_LSA_3.initialize_Area1_LSA()
-                    Area_2_LSA_3.initialize_Area2_LSA()
+                    Area_1_LSA_3.initialize_Area2_LSA()
+                    Area_1_LSA_3.initialize_Area3_LSA()
                     LSA_3_trigger = 1
             
             if (button_LSA_3_refresh[0] < mouse_pos[0] < button_LSA_3_refresh[0] + button_width) and \
                (button_LSA_3_refresh[1] < mouse_pos[1] < button_LSA_3_refresh[1] + button_height):
                 LSA_3_trigger = 0
-                Area_1_LSA_3.erase_text()
-                Area_2_LSA_3.erase_text()
+                Area_1_LSA_3.erase_text_area_1()
+                Area_1_LSA_3.erase_text_area_2()
+                Area_1_LSA_3.erase_text_area_3()
 
             
             # if the master_simulation button gets clicked
@@ -458,7 +464,9 @@ while running:
                     
                     # doing Area 3 initializations
                     Area_1_LSA_3.initialize_Area1_LSA()
-                    Area_2_LSA_3.initialize_Area2_LSA()
+                    Area_1_LSA_3.initialize_Area2_LSA()
+                    Area_1_LSA_3.initialize_Area3_LSA()
+                    Area_1_LSA_3.initialize_common_variables()
                     master_simulation_trigger = 1
             
             if (master_simulator_refresh[0] < mouse_pos[0] < master_simulator_refresh[0] + master_button_width) and \
@@ -466,11 +474,10 @@ while running:
                 # TODO: we can remove this: it is un-needed
                 master_simulation_trigger = 0
                 # erase the last LSA (for now it is LSA 3)
-                Area_1_LSA_3.erase_text()
-                Area_2_LSA_3.erase_text()
-
+                Area_1_LSA_3.erase_text_area_1()
+                Area_1_LSA_3.erase_text_area_2()
+                Area_1_LSA_3.erase_text_area_3()
             
-
     # elif event.type == pygame.MOUSEBUTTONUP:
     #     if event.button == 1:  # Left mouse button
     #         speed_slider_dragging = False
@@ -513,7 +520,8 @@ while running:
     
     if LSA_3_trigger == 1:
         Area_1_LSA_3.SendArea1LSA3(pygame, screen)
-        Area_2_LSA_3.SendArea2LSA3(pygame, screen)
+        Area_1_LSA_3.SendArea2LSA3(pygame, screen)
+        Area_1_LSA_3.SendArea3LSA3(pygame, screen)
     
     if master_simulation_trigger == 1:
         if switch == 1:
@@ -530,12 +538,14 @@ while running:
                     # TODO: Maybe display a text in here that LSA 1 is not complete
         elif switch == 3:
             r1 = Area_1_LSA_3.SendArea1LSA3(pygame, screen)
-            r2 = Area_2_LSA_3.SendArea2LSA3(pygame, screen)
-            if (r1 == 1 and r2 == 1):
+            r2 = Area_1_LSA_3.SendArea2LSA3(pygame, screen)
+            r3 = Area_1_LSA_3.SendArea3LSA3(pygame, screen)
+            if (r1 == 1 and r2 == 1 and r3 == 1):
                 switch = 4 # switch to LSA 3
                 # but also clear the data that was displayed because of LSA 1
-                Area_1_LSA_3.erase_text()
-                Area_2_LSA_3.erase_text()
+                Area_1_LSA_3.erase_text_area_1()
+                Area_1_LSA_3.erase_text_area_2()
+                Area_1_LSA_3.erase_text_area_3()
         elif switch == 4:
             master_simulation_trigger = 0 # because we have no more LSAs to send right now
             switch = 1 # reset

@@ -136,6 +136,13 @@ def RouterSwitchArea2():
     screen.blit(text_3, text_3.get_rect(center=router_9_pos))
     screen.blit(text_4, text_4.get_rect(center=router_10_pos))
 
+    # making the ISP here
+    # TODO: Make another function where we can have code related to ASBR
+    pygame.draw.circle(screen, (159, 173, 191), (router_isp_pos[0], router_isp_pos[1]), router_radius)
+    text_5 = font.render('ISP', True, (0, 0, 0))
+    text_pos_1 = ((box_size - font.size('ISP')[0]) // 2, (box_size - font.size('ISP')[1]) // 2)
+    screen.blit(text_5, text_5.get_rect(center=router_isp_pos))
+
 def Area2Connections():
     # router 7 --> router 8
     center_box = (router_7_pos[0], router_7_pos[1] + router_radius)
@@ -316,6 +323,15 @@ def InterAreaConnections():
     closest_point = (int(router_15_pos[0] + router_radius * math.cos(a)), int(router_15_pos[1] + router_radius * math.sin(a)))
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
     inter_area_routes["router_10__TO__router__15"] = [center_box, closest_point]
+
+    # Router 7 (Area 2) --> ISP
+    center_box = (router_7_pos[0], router_7_pos[1] - router_radius)
+    x = center_box[0] - router_isp_pos[0]
+    y = center_box[1] - router_isp_pos[1]
+    a = math.atan2(y, x)
+    closest_point = (int(router_isp_pos[0] + router_radius * math.cos(a)), int(router_isp_pos[1] + router_radius * math.sin(a)))
+    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+    inter_area_routes["router_7__TO__router__isp"] = [center_box, closest_point]
 
     # TODO: FIX THIS 
     # # Router 9 (Area 3) --> Switch 5 (Area 2)

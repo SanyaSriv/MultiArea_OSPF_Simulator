@@ -77,6 +77,10 @@ router_16_pos = (1200, 600)
 router_17_pos = (1200, 470)
 router_18_pos = (1320, 600)
 
+# making the ASBR
+router_isp_pos = (750, 60)
+
+
 switch_4_pos = (1295, 445)
 
 # Position of inter-area switch (I will build it in area 2 functions for now)

@@ -45,6 +45,7 @@ router_radius = 30
 # POsition of Area 1 routers
 router_1_pos = (195, 250)
 router_2_pos = (355, 375)
+# router_2_pos = (455, 270)
 router_3_pos = (65, 500)
 router_4_pos = (65, 375)
 router_5_pos_area_1 = (195, 375)
@@ -57,7 +58,7 @@ inter_area_routes = {}
 
 # Position of all the area boundaries
 area_1_pos = (20, 200)
-area_2_pos = (550, 100) # backbone area
+area_2_pos = (450, 100) # backbone area
 area_3_pos = (1010, 100) # area 3
 area_4_pos = (1010, 420) # area 4
 
@@ -79,6 +80,9 @@ router_15_pos = (1070, 470)
 router_16_pos = (1200, 600)
 router_17_pos = (1200, 470)
 router_18_pos = (1320, 600)
+
+# making some ABRs:
+router_abr_1 = (455, 245)
 
 # making the ASBR
 router_isp_pos = (750, 60)

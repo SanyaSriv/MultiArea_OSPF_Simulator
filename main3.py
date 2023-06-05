@@ -24,10 +24,10 @@ screen.fill((255, 255, 255))
 
 def AreaBoundaryDrawer():
     # Making Area 1 boundary
-    pygame.draw.rect(screen, (231, 230, 240), (area_1_pos[0], area_1_pos[1], box_size * 4.8, box_size * 4.8))
+    pygame.draw.rect(screen, (231, 230, 240), (area_1_pos[0], area_1_pos[1], box_size * 5.4, box_size * 4.8))
 
     # Making the backbone area boundary: I will be calling this area 2
-    pygame.draw.rect(screen, (231, 240, 230), (area_2_pos[0], area_2_pos[1], box_size * 3, box_size * 4.8))
+    pygame.draw.rect(screen, (231, 240, 230), (area_2_pos[0], area_2_pos[1], box_size * 5, box_size * 4.8))
 
     # Making a third area: Area 3 
     pygame.draw.rect(screen, (240, 240, 230), (area_3_pos[0], area_3_pos[1], box_size * 4.5, box_size * 3))
@@ -44,6 +44,8 @@ def RouterSwitchArea1():
     pygame.draw.circle(screen, (159, 173, 191), (router_5_pos_area_1[0], router_5_pos_area_1[1]), router_radius)
     pygame.draw.circle(screen, (159, 173, 191), (router_6_pos_area_1[0], router_6_pos_area_1[1]), router_radius)
 
+    pygame.draw.circle(screen, (159, 173, 191), (router_abr_1[0], router_abr_1[1]), router_radius)
+
     # Render text to display inside each box
     font = pygame.font.SysFont('Arial', 12)
     text_1 = font.render('Router 1', True, (0, 0, 0))
@@ -52,7 +54,7 @@ def RouterSwitchArea1():
     text_4 = font.render('Router 4', True, (0, 0, 0))
     text_5 = font.render('Router 5', True, (0, 0, 0))
     text_6 = font.render('Router 6', True, (0, 0, 0))
-
+    text_7 = font.render('ABR 1', True, (0,0,0))
     # Calculate the position to display the text in the center of each box
     text_pos = ((box_size - font.size('Router 1')[0]) // 2, (box_size - font.size('Router 1')[1]) // 2)
 
@@ -62,6 +64,7 @@ def RouterSwitchArea1():
     screen.blit(text_4, text_1.get_rect(center=router_4_pos))
     screen.blit(text_5, text_1.get_rect(center=router_5_pos_area_1))
     screen.blit(text_6, text_1.get_rect(center=router_6_pos_area_1))
+    screen.blit(text_7, text_1.get_rect(center=router_abr_1))
 
 def Area1Connections():
     global triangle_pos
@@ -299,13 +302,32 @@ def Area4Connections():
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
 
 def InterAreaConnections():
+    
+    # Router 2 (Area 1) --> ABR for Area 1 and 2
+    center_box = (router_2_pos[0], router_2_pos[1] - router_radius)
+    x = center_box[0] - router_abr_1[0]
+    y = center_box[1] - router_abr_1[1]
+    a = math.atan2(y, x)
+    closest_point = (int(router_abr_1[0] + router_radius * math.cos(a)), int(router_abr_1[1] + router_radius * math.sin(a)))
+    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+    inter_area_routes["router_2__TO__router_abr1"] = [closest_point, center_box]
+
+    # Router 7 (Area 2) --> ABR for Area 1 and 2
+    center_box = (router_7_pos[0] - router_radius, router_7_pos[1])
+    x = center_box[0] - router_abr_1[0]
+    y = center_box[1] - router_abr_1[1]
+    a = math.atan2(y, x)
+    closest_point = (int(router_abr_1[0] + router_radius * math.cos(a)), int(router_abr_1[1] + router_radius * math.sin(a)))
+    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+    inter_area_routes["router_7__TO__router_abr1"] = [center_box, closest_point]
+    
     # Router 2 (Area 1) --> Router 7 (Area 2)
     center_box = (router_7_pos[0] - router_radius, router_7_pos[1])
     x = center_box[0] - router_2_pos[0]
     y = center_box[1] - router_2_pos[1]
     a = math.atan2(y, x)
     closest_point = (int(router_2_pos[0] + router_radius * math.cos(a)), int(router_2_pos[1] + router_radius * math.sin(a)))
-    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+    # pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
     inter_area_routes["router_2__TO__router_7"] = [closest_point, center_box]
     
     # Router 10 (Area 2) --> Router 11 (Area 3)

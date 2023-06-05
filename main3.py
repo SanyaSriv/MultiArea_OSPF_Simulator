@@ -66,6 +66,10 @@ def RouterSwitchArea1():
     screen.blit(text_6, text_1.get_rect(center=router_6_pos_area_1))
     screen.blit(text_7, text_1.get_rect(center=router_abr_1))
 
+    font = pygame.font.SysFont('Arial', 25)
+    text = font.render("Area 1", True, (0, 0, 0))
+    screen.blit(text, (140, 600))
+
 def Area1Connections():
     global triangle_pos
     # router 5 area 1 --> router 1
@@ -147,6 +151,10 @@ def RouterSwitchArea2():
     text_5 = font.render('ISP', True, (0, 0, 0))
     text_pos_1 = ((box_size - font.size('ISP')[0]) // 2, (box_size - font.size('ISP')[1]) // 2)
     screen.blit(text_5, text_5.get_rect(center=router_isp_pos))
+
+    font = pygame.font.SysFont('Arial', 25)
+    text = font.render("Area 2 (Backbone Area)", True, (0, 0, 0))
+    screen.blit(text, (530, 530))
 
 def Area2Connections():
     # router 7 --> router 8
@@ -339,14 +347,16 @@ def InterAreaConnections():
     pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
     inter_area_routes["router_10__TO__router_11"] = [center_box, closest_point]
 
+    # NOTE: REMOVING THIS LINK FOR NOW
     # Router 10 (Area 2) --> Router 15 (Area 4)
-    center_box = (router_10_pos[0] + router_radius, router_10_pos[1])
-    x = center_box[0] - router_15_pos[0]
-    y = center_box[1] - router_15_pos[1]
-    a = math.atan2(y, x)
-    closest_point = (int(router_15_pos[0] + router_radius * math.cos(a)), int(router_15_pos[1] + router_radius * math.sin(a)))
-    pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
-    inter_area_routes["router_10__TO__router__15"] = [center_box, closest_point]
+    # center_box = (router_10_pos[0] + router_radius, router_10_pos[1])
+    # x = center_box[0] - router_15_pos[0]
+    # y = center_box[1] - router_15_pos[1]
+    # a = math.atan2(y, x)
+    # closest_point = (int(router_15_pos[0] + router_radius * math.cos(a)), int(router_15_pos[1] + router_radius * math.sin(a)))
+    # pygame.draw.line(screen, (0, 0, 0),  closest_point, center_box, 3)
+    # inter_area_routes["router_10__TO__router__15"] = [center_box, closest_point]
+
 
     # Router 7 (Area 2) --> ISP
     center_box = (router_7_pos[0], router_7_pos[1] - router_radius)

@@ -27,13 +27,14 @@ def AreaBoundaryDrawer():
     pygame.draw.rect(screen, (231, 230, 240), (area_1_pos[0], area_1_pos[1], box_size * 5.4, box_size * 4.8))
 
     # Making the backbone area boundary: I will be calling this area 2
-    pygame.draw.rect(screen, (231, 240, 230), (area_2_pos[0], area_2_pos[1], box_size * 5, box_size * 4.8))
+    pygame.draw.rect(screen, (231, 240, 230), (area_2_pos[0], area_2_pos[1], box_size * 6.2, box_size * 4.8))
 
     # Making a third area: Area 3 
-    pygame.draw.rect(screen, (240, 240, 230), (area_3_pos[0], area_3_pos[1], box_size * 4.5, box_size * 3))
+    pygame.draw.rect(screen, (237, 237, 175), (area_3_pos[0], area_3_pos[1], box_size * 5.3, box_size * 3))
 
     # Making a 4th area: Area 4
-    pygame.draw.rect(screen, (240, 230, 238), (area_4_pos[0], area_4_pos[1], box_size * 4.5, box_size * 3))
+    # NOTE: I AM REMOVING AREA 4 FOR NOW
+    # pygame.draw.rect(screen, (240, 230, 238), (area_4_pos[0], area_4_pos[1], box_size * 4.5, box_size * 3))
 
 def RouterSwitchArea1():
     # Mkaing routers for area 1: All routers will be circles
@@ -202,7 +203,8 @@ def RouterSwitchArea3():
     
      # Render text to display inside each box
     font = pygame.font.SysFont('Arial', 12)
-    text_1 = font.render('Router 11', True, (0, 0, 0))
+    # Router 11 is ABR 2 (internally, we will refer to it as router 11)
+    text_1 = font.render("R11: ABR2", True, (0, 0, 0))
     text_2 = font.render('Router 12', True, (0, 0, 0))
     text_3 = font.render('Router 13', True, (0, 0, 0))
     text_4 = font.render('Router 14', True, (0, 0, 0))
@@ -215,6 +217,11 @@ def RouterSwitchArea3():
     screen.blit(text_3, text_3.get_rect(center=router_13_pos))
     screen.blit(text_4, text_4.get_rect(center=router_14_pos))
 
+    font = pygame.font.SysFont('Arial', 25)
+    text = font.render("Area 3 (Stubby Area)", True, (0, 0, 0))
+    screen.blit(text, (1050, 530))
+
+
 def Area3Connections():
     # Router 11 --> Router 13
     center_box = (router_11_pos[0] + router_radius, router_11_pos[1])
@@ -226,7 +233,7 @@ def Area3Connections():
     area_3_travel_routes["router_11__TO__router_13"] = [center_box, closest_point]
 
     # Router 13 --> Router 14
-    center_box = (router_14_pos[0], router_14_pos[1])
+    center_box = (router_14_pos[0], router_14_pos[1] - router_radius)
     x = center_box[0] - router_13_pos[0]
     y = center_box[1] - router_13_pos[1]
     a = math.atan2(y, x)
@@ -235,7 +242,7 @@ def Area3Connections():
     area_3_travel_routes["router_13__TO__router_14"] = [closest_point, center_box]
 
     # Router 14 --> Router 12
-    center_box = (router_14_pos[0], router_14_pos[1])
+    center_box = (router_14_pos[0] - router_radius, router_14_pos[1])
     x = center_box[0] - router_12_pos[0]
     y = center_box[1] - router_12_pos[1]
     a = math.atan2(y, x)
@@ -583,8 +590,9 @@ while running:
     Area3Connections()
 
     # Doing All Area 4 work
-    RouterSwitchArea4()
-    Area4Connections()
+    # NOTE: I AM REMOVING AREA 4 FOR NOW
+    # RouterSwitchArea4()
+    # Area4Connections()
 
     # Making connections between different areas
     InterAreaConnections()

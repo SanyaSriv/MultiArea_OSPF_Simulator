@@ -59,7 +59,7 @@ inter_area_routes = {}
 # Position of all the area boundaries
 area_1_pos = (20, 200)
 area_2_pos = (450, 100) # backbone area
-area_3_pos = (1010, 100) # area 3
+area_3_pos = (945, 230) # area 3
 area_4_pos = (1010, 420) # area 4
 
 # Position of all Area 2 Routers (There would be 3 routers (I am thinking))
@@ -69,10 +69,10 @@ router_9_pos = (610,430)
 router_10_pos = (740, 290)
 
 # Position of all Area 3 Routers and switches
-router_11_pos = (1070, 150)
-router_12_pos = (1070, 300)
-router_13_pos = (1270, 150)
-router_14_pos = (1270, 300)
+router_11_pos = (950, 290)
+router_12_pos = (1070, 425)
+router_13_pos = (1270, 290)
+router_14_pos = (1270, 425)
 switch_3_pos = (1225, 275)
 
 # Position of all Area 4 Routers and switches

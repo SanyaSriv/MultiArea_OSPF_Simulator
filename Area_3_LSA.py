@@ -19,12 +19,12 @@ def initialize_Area3_LSA():
     global router_11_text, router_12_text, router_13_text, router_14_text
     global list_text_position_area_3, text_dictionary_LSA_1_area_3
     global list_of_Area_3_triangles
-    
+
     # initialize all the text positions
-    router_11_text = [1030, 110, 1]
-    router_12_text = [1030, 260, 1]
-    router_13_text = [1220, 110, 1]
-    router_14_text = [1220, 325, 1]
+    router_11_text = [950, 245, 1]
+    router_12_text = [1030, 385, 1]
+    router_13_text = [1220, 245, 1]
+    router_14_text = [1220, 455, 1]
 
     list_of_Area_3_triangles = []
     list_text_position_area_3 = []
@@ -33,7 +33,7 @@ def initialize_Area3_LSA():
     # ROUTER 11 LSA 1
     router_11_t1 = LSATriangles(area_3_travel_routes["router_11__TO__router_13"][0],
                                area_3_travel_routes["router_11__TO__router_13"][1],
-                                (137, 25, 181))
+                                (242, 154, 87))
     router_11_t1.enable_full_route([area_3_travel_routes["router_11__TO__router_13"][0],
                                     area_3_travel_routes["router_11__TO__router_13"][1],
                                     area_3_travel_routes["router_13__TO__router_14"][0],

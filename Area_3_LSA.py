@@ -4,6 +4,8 @@ from LSA_Class import LSATriangles
 from global_variables_file import *
 
 list_of_Area_3_triangles = []
+text_dictionary_LSA_1_area_3 = {}
+list_text_position_area_3 = []
 
 # third parameter: which index to increase
 router_11_text = [0, 0, 0]
@@ -11,9 +13,6 @@ router_12_text = [0, 0, 0]
 router_13_text = [0, 0, 0]
 router_14_text = [0, 0, 0]
 increase_position = 10
-
-text_dictionary_LSA_1_area_3 = {}
-list_text_position_area_3 = []
 
 def initialize_Area3_LSA():
     global router_11_text, router_12_text, router_13_text, router_14_text
@@ -33,7 +32,7 @@ def initialize_Area3_LSA():
     # ROUTER 11 LSA 1
     router_11_t1 = LSATriangles(area_3_travel_routes["router_11__TO__router_13"][0],
                                area_3_travel_routes["router_11__TO__router_13"][1],
-                                (242, 154, 87))
+                                router_11_color)
     router_11_t1.enable_full_route([area_3_travel_routes["router_11__TO__router_13"][0],
                                     area_3_travel_routes["router_11__TO__router_13"][1],
                                     area_3_travel_routes["router_13__TO__router_14"][0],
@@ -46,7 +45,7 @@ def initialize_Area3_LSA():
     # ROUTER 12 LSA 1
     router_12_t1 = LSATriangles(area_3_travel_routes["router_14__TO__router_12"][1],
                                area_3_travel_routes["router_14__TO__router_12"][0],
-                                (17, 125, 181))
+                                router_12_color)
     router_12_t1.enable_full_route([area_3_travel_routes["router_14__TO__router_12"][1],
                                     area_3_travel_routes["router_14__TO__router_12"][0],
                                     area_3_travel_routes["router_13__TO__router_14"][1],
@@ -60,7 +59,7 @@ def initialize_Area3_LSA():
     # ROUTER 13 LSA 1
     router_13_t1 = LSATriangles(area_3_travel_routes["router_11__TO__router_13"][1],
                                area_3_travel_routes["router_11__TO__router_13"][0],
-                                (32, 158, 3))
+                                router_13_color)
     router_13_t1.enable_full_route([area_3_travel_routes["router_11__TO__router_13"][1],
                                     area_3_travel_routes["router_11__TO__router_13"][0]])
     router_13_t1.update_starting_router("router_13")
@@ -68,7 +67,7 @@ def initialize_Area3_LSA():
 
     router_13_t2 = LSATriangles(area_3_travel_routes["router_13__TO__router_14"][0],
                                area_3_travel_routes["router_13__TO__router_14"][1],
-                                (32, 158, 3))
+                                router_13_color)
     router_13_t2.enable_full_route([area_3_travel_routes["router_13__TO__router_14"][0],
                                     area_3_travel_routes["router_13__TO__router_14"][1],
                                     area_3_travel_routes["router_14__TO__router_12"][0],
@@ -79,7 +78,7 @@ def initialize_Area3_LSA():
     # ROUTER 14 LSA 1
     router_14_t1 = LSATriangles(area_3_travel_routes["router_14__TO__router_12"][0],
                                 area_3_travel_routes["router_14__TO__router_12"][1],
-                                (32, 15, 73))
+                                router_14_color)
     router_14_t1.enable_full_route([area_3_travel_routes["router_14__TO__router_12"][0],
                                     area_3_travel_routes["router_14__TO__router_12"][1]])
     router_14_t1.update_starting_router("router_14")
@@ -87,7 +86,7 @@ def initialize_Area3_LSA():
 
     router_14_t2 = LSATriangles(area_3_travel_routes["router_13__TO__router_14"][1],
                                 area_3_travel_routes["router_13__TO__router_14"][0],
-                                (32, 15, 73))
+                                router_14_color)
     router_14_t2.enable_full_route([area_3_travel_routes["router_13__TO__router_14"][1],
                                     area_3_travel_routes["router_13__TO__router_14"][0],
                                     area_3_travel_routes["router_11__TO__router_13"][1],

@@ -1,7 +1,7 @@
 import math
 
 class LSATriangles:
-    shared_speed = 5
+    shared_speed = 3
 
     def __init__(self, position, target, color):
         self.position = position
@@ -17,6 +17,12 @@ class LSATriangles:
         self.full_route = []
         self.current_start = 0
         self.current_end = 1
+
+        # which LSA type is this
+        self.LSA_type = 0
+        self.from_area = ""
+        self.to_area = ""
+        self.LSA_3_start = ""
 
     def enable_full_route(self, route):
         self.full_route = route
@@ -36,7 +42,7 @@ class LSATriangles:
                 self.position[1] + direction[1] * self.speed
         )
         else:
-            print("the hop count is: ", self.hop_count_number)
+            # print("the hop count is: ", self.hop_count_number)
             to_ret = self.router_path_names[self.hop_count_number] 
             self.hop_count_number += 1 # we switch paths
 
@@ -68,3 +74,21 @@ class LSATriangles:
 
     def change_speed(self, new_speed):
         LSATriangles.shared_speed = new_speed
+
+    def set_LSA_type(self, ty, from_area, to_area, start):
+        self.LSA_type = ty
+        self.to_area = to_area
+        self.from_area = from_area
+        self.LSA_3_start = start
+    
+    def get_LSA_type(self):
+        return int(self.LSA_type)
+    
+    def get_from_area(self):
+        return str(self.from_area)
+    
+    def get_to_area(self):
+        return str(self.to_area)
+    
+    def get_lsa_3_starting_router(self):
+        return str(self.LSA_3_start)

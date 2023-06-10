@@ -16,13 +16,19 @@ button_LSA_1_refresh = (130, 20)
 button_LSA_3_pos = (20, 70)
 button_LSA_3_refresh = (130, 70)
 
-button_LSA_4_pos = (260, 20)
-button_LSA_4_refresh = (370, 20)
+button_LSA_4_pos = (240, 20)
+button_LSA_4_refresh = (350, 20)
+
+button_LSA_5_pos = (240, 70)
+button_LSA_5_refresh = (350, 70)
 
 master_button_width = 150
 master_button_color = (217, 215, 98)
 master_simulator = (20, 120)
 master_simulator_refresh = (190, 120)
+
+button_display_seperate_lsa_3 = (1010, 20)
+seperate_lsa_3_width = 150
 
 # For sliders
 slider_width = 70
@@ -95,3 +101,40 @@ switch_5_pos = (850, 265)
 
 # List of all LSAs here (as of now I am planning to represent it by a triangle)
 area_1_LSA_1 = []
+
+
+router_1_color = (137, 25, 181)
+router_2_color = (181, 121, 25)
+router_3_color = (32, 158, 3)
+router_4_color = (219, 15, 43)
+router_5_color = (50, 166, 168)
+router_6_color = (237, 222, 9)
+router_ABR1_color = (79, 24, 68)
+
+router_7_color = (137, 25, 181)
+router_8_color = (181, 121, 25)
+router_9_color = (32, 158, 3)
+router_10_color = (219, 15, 43)
+router_11_color = (242, 154, 87)
+
+router_12_color = (17, 125, 181)
+router_13_color = (32, 158, 3)
+router_14_color = (32, 15, 73)
+
+# distinct colors
+# router_1_color = (173, 216, 230)
+# router_2_color = (0, 0, 139)
+# router_3_color = (0, 255, 255)
+# router_4_color = (0, 0, 128)
+# router_5_color = (135, 206, 235)
+# router_6_color = (65, 105, 225)
+# router_ABR1_color = (138, 43, 226)
+# router_7_color = (0, 255, 0)
+# router_8_color = (34, 139, 34)
+# router_9_color = (152, 255, 152)
+# router_10_color = (128, 128, 0)
+# router_11_color = (242, 154, 87)
+# router_12_color =  (218, 165, 32)
+# router_13_color = (255, 219, 88)
+# router_14_color = (255, 191, 0)
+

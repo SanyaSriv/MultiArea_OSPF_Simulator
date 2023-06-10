@@ -50,7 +50,7 @@ def initialize_common_variables():
     router_14_text = [1220, 455, 1]
     router_ABR_text = [350, 200, 1]
 
-def initialize_LSA_4_routes():
+def initialize_LSA_5_routes():
     global list_text_position, text_dictionary_LSA_4
    
     list_text_position = []
@@ -146,7 +146,7 @@ def initialize_LSA_4_routes():
     # router_7_t4.update_starting_router("router_7")
     # router_7_t4.update_router_path_names(["router_10", "router_11", "router_13", "router_14", "router_12"])
 
-    # ABR 2 RECIEVES BUT DOES NOT PROPOGATE
+     # ABR 2 RECIEVES BUT DOES NOT PROPOGATE
     router_7_t4 = LSATriangles(area_2_travel_routes["router_7__TO__router_10"][0],
                                 area_2_travel_routes["router_7__TO__router_10"][1],
                                 (117, 227, 104))
@@ -164,7 +164,7 @@ def initialize_LSA_4_routes():
     list_of_LSA_4_triangles.append(router_7_t5)
     list_of_LSA_4_triangles.append(router_7_t6)
 
-def Send_LSA_4(pygame, screen):
+def Send_LSA_5(pygame, screen):
     global router_1_text, router_2_text, router_3_text, router_4_text, router_5_text, router_6_text
     global list_text_position, text_dictionary_LSA_4
     global router_ABR_text
@@ -181,12 +181,8 @@ def Send_LSA_4(pygame, screen):
         if (to_be_removed == 1):
             list_of_LSA_4_triangles.remove(i) # so we do not have a permanent triangle stattioned on the last router
         if (router_reached != None):
-            if router_reached in ["router_7", "router_8", "router_9", "router_10", "ABR_1", "router_11"]:
-                text_string = "Recieved LSA 1: {}".format(router_started)
-                dictionary_text_string = "{} Recieved LSA 4 from {}".format(router_reached, router_started)
-            else:
-                text_string = "Recieved LSA 4: {}".format(router_started)
-                dictionary_text_string = "{} Recieved LSA 4 from {}".format(router_reached, router_started)
+            text_string = "Recieved LSA 5: {}".format(router_started)
+            dictionary_text_string = "{} Recieved LSA 5 from {}".format(router_reached, router_started)
             
             if (dictionary_text_string in text_dictionary_LSA_4):
                 continue
@@ -250,7 +246,7 @@ def Send_LSA_4(pygame, screen):
     return 0 # in progress
 
 
-def erase_LSA_4_text():
+def erase_LSA_5_text():
     global text_dictionary_LSA_4
     global list_text_position
     global list_of_LSA_4_triangles

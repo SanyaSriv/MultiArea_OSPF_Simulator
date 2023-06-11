@@ -1,7 +1,7 @@
 import math
 
 class LSATriangles:
-    shared_speed = 3
+    shared_speed = 5
 
     def __init__(self, position, target, color):
         self.position = position
@@ -26,7 +26,6 @@ class LSATriangles:
 
     def enable_full_route(self, route):
         self.full_route = route
-        print(self.full_route)
 
     def move_triangle(self, pygame, screen):
         dx = self.target[0] - self.position[0]
@@ -42,7 +41,6 @@ class LSATriangles:
                 self.position[1] + direction[1] * self.speed
         )
         else:
-            # print("the hop count is: ", self.hop_count_number)
             to_ret = self.router_path_names[self.hop_count_number] 
             self.hop_count_number += 1 # we switch paths
 

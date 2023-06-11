@@ -22,6 +22,8 @@ router_14_text = [0,0,0]
 
 seperate_lsa_3 = 0
 
+clearing_text = 0
+
 increase_position = 10
 global_counter = 0
 
@@ -41,6 +43,10 @@ text_dictionary_LSA_1_area_3 = {}
 list_text_position_area_3 = []
 color_property = 0
 
+def clearing_text_set(val):
+    global clearing_text
+    clearing_text = val
+
 def sub_some_x(lis, val):
     return [lis[0] - val, lis[1], lis[2]]
 
@@ -59,13 +65,13 @@ def global_initialization(LSA_3):
     seperate_lsa_3 = LSA_3
 
     # if LSA_3 == 0:
-    router_1_text = [220, 250, 1]
-    router_2_text = [405, 375, 1]
+    router_1_text = [220, 245, 1]
+    router_2_text = [385, 375, 1]
     router_3_text = [35, 530, 1]
     router_4_text = [35, 330, 1]
     router_5_text = [175, 410, 1]
     router_6_text = [325, 530, 1]
-    router_7_text = [630, 130, 1]
+    router_7_text = [630, 100, 1]
     router_8_text = [460, 280, 1]
     router_9_text = [610, 460, 1]
     router_10_text = [750, 320, 1]
@@ -418,6 +424,7 @@ def SendArea1LSA1(pygame, screen):
     global text_dictionary_LSA_1
     global list_text_position
     global seperate_lsa_3
+    global clearing_text
 
     font = pygame.font.Font(None, 14)
 
@@ -434,26 +441,40 @@ def SendArea1LSA1(pygame, screen):
             # this might recieve LSA 3 or LSA 1
             text_string = ""
             dictionary_text_string = ""
-            if i.get_LSA_type() == 3:
-                if seperate_lsa_3 == 1:
-                    text_string = "Recieved LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
-                    dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+            if clearing_text == 1:
+                if i.get_LSA_type() == 3:
+                    if seperate_lsa_3 == 1:
+                        text_string = "LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                    else:
+                        text_string = "LSA 3: area {}".format(i.get_from_area())
+                        dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                elif i.get_LSA_type() == 4:
+                    text_string = "LSA 4: area {}".format(i.get_from_area())
+                    dictionary_text_string = "{} Recieved LSA 4 from {}".format(router_reached, i.get_from_area())
                 else:
-                    text_string = "Recieved LSA 3: area {}".format(i.get_from_area())
-                    dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
-            elif i.get_LSA_type() == 4:
-                text_string = "Recieved LSA 4: area {}".format(i.get_from_area())
-                dictionary_text_string = "{} Recieved LSA 4 from {}".format(router_reached, i.get_from_area())
+                    text_string = "LSA 1: {}".format(router_started)
+                    dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
             else:
-                text_string = "Recieved LSA 1: {}".format(router_started)
-                dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
-            
+                if i.get_LSA_type() == 3:
+                    if seperate_lsa_3 == 1:
+                        text_string = "Recieved LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                    else:
+                        text_string = "Recieved LSA 3: area {}".format(i.get_from_area())
+                        dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                elif i.get_LSA_type() == 4:
+                    text_string = "Recieved LSA 4: area {}".format(i.get_from_area())
+                    dictionary_text_string = "{} Recieved LSA 4 from {}".format(router_reached, i.get_from_area())
+                else:
+                    text_string = "Recieved LSA 1: {}".format(router_started)
+                    dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
+                
             if (dictionary_text_string in text_dictionary_LSA_1):
                 continue
             else:
                 text_dictionary_LSA_1[dictionary_text_string] = 1
 
-            # print(router_reached, router_started)
             if router_reached == "router_1":
                 list_text_position.append([text_string, (router_1_text[0], router_1_text[1])])
                 router_1_text[router_1_text[2]] += increase_position
@@ -489,7 +510,6 @@ def SendArea1LSA1(pygame, screen):
             elif router_reached == "router_14":
                 list_text_position.append([text_string, (router_14_text[0], router_14_text[1])])
                 router_14_text[1] += increase_position
-            # print(list_text_position)
     for i in list_text_position:
         if "LSA 3" in i[0]:
             # represent it in a different color
@@ -498,6 +518,9 @@ def SendArea1LSA1(pygame, screen):
         elif "LSA 4" in i[0]:
             # represent it in a different color
             text = font.render(i[0], True, (0, 0, 255))
+            screen.blit(text, (i[1][0], i[1][1]))
+        elif "LSA 5" in i[0]:
+            text = font.render(i[0], True, (0, 255, 0))
             screen.blit(text, (i[1][0], i[1][1]))
         else:
             text = font.render(i[0], True, (0, 0, 0))
@@ -824,6 +847,7 @@ def SendArea2LSA1(pygame, screen):
     global list_text_position_area_2
     global global_counter
     global seperate_lsa_3
+    global clearing_text
 
     font = pygame.font.Font(None, 14)
 
@@ -833,20 +857,37 @@ def SendArea2LSA1(pygame, screen):
         router_reached = return_value[0]
         router_started = return_value[1]
         to_be_removed = return_value[2]
-
         if (to_be_removed == 1):
             list_of_Area_2_triangles.remove(i) # so we do not have a permanent triangle stationed on the last router
         if (router_reached != None):
-            if i.get_LSA_type() == 3:
-                if seperate_lsa_3 == 1:
-                    text_string = "Recieved LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
-                    dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+            if clearing_text == 1:
+                if i.get_LSA_type() == 3:
+                    if seperate_lsa_3 == 1:
+                        text_string = "LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                    else:
+                        text_string = "LSA 3: area {}".format(i.get_from_area())
+                        dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                elif i.get_LSA_type() == 5:
+                    text_string = "LSA 5 : {}".format("Router 7: ASBR")
+                    dictionary_text_string = "{} Recieved LSA 5 from {} : {}".format(router_reached, i.get_from_area(), "Router 7: ASBR")
                 else:
-                    text_string = "Recieved LSA 3: area {}".format(i.get_from_area())
-                    dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                    text_string = "LSA 1: {}".format(router_started)
+                    dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
             else:
-                text_string = "Recieved LSA 1: {}".format(router_started)
-                dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
+                if i.get_LSA_type() == 3:
+                    if seperate_lsa_3 == 1:
+                        text_string = "Recieved LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                    else:
+                        text_string = "Recieved LSA 3: area {}".format(i.get_from_area())
+                        dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                elif i.get_LSA_type() == 5:
+                    text_string = "Recieved LSA 5 : {}".format("Router 7: ASBR")
+                    dictionary_text_string = "{} Recieved LSA 5 from {} : {}".format(router_reached, i.get_from_area(), "Router 7: ASBR")
+                else:
+                    text_string = "Recieved LSA 1: {}".format(router_started)
+                    dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
             # text_string = "Recieved LSA 1: {}".format(router_started)
             # dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
             
@@ -889,7 +930,6 @@ def SendArea2LSA1(pygame, screen):
                 list_text_position_area_2.append([text_string, (router_ABR_text[0], router_ABR_text[1])])
                 router_ABR_text[router_ABR_text[2]] += increase_position
                 # this would mean that we now need to send LSA3 in area 1
-                print("TYPE IN HERE IS: ")
                 if (i.get_LSA_type() == 0):
                     # only send out LSA 3 if this is an lsa 1
                     initialize_LSA3_from_area_2_to_area_1(router_started)
@@ -900,10 +940,10 @@ def SendArea2LSA1(pygame, screen):
                 # this would mean that we now need to send LSA3 in area 1
                 list_text_position_area_2.append([text_string, (router_11_text[0], router_11_text[1])])
                 router_11_text[router_11_text[2]] -= increase_position
-                initialize_LSA3_from_area_2_to_area_3(router_started)
+                if (i.get_LSA_type() == 0):
+                    initialize_LSA3_from_area_2_to_area_3(router_started)
                 # this would mean that we now need to send LSA3 in area 3 (stubby area)
             elif router_reached == "router_12":
-                print("ROUTER 2 REACHED")
                 list_text_position_area_2.append([text_string, (router_12_text[0], router_12_text[1])])
                 router_12_text[1] -= increase_position
             elif router_reached == "router_13":
@@ -917,6 +957,9 @@ def SendArea2LSA1(pygame, screen):
         if "LSA 3" in i[0]:
             # represent it in a different color
             text = font.render(i[0], True, (255, 0, 0))
+            screen.blit(text, (i[1][0], i[1][1]))
+        elif "LSA 5" in i[0]:
+            text = font.render(i[0], True, (0, 255, 0))
             screen.blit(text, (i[1][0], i[1][1]))
         else:
             text = font.render(i[0], True, (0, 0, 0))
@@ -937,6 +980,7 @@ def erase_text_area_2():
     text_dictionary_LSA_1_area_2 = {}
     list_text_position_area_2 = []
 
+################################################################################
 
 def initialize_LSA3_from_area_2_to_area_1(starting_router):
     global global_counter
@@ -944,7 +988,6 @@ def initialize_LSA3_from_area_2_to_area_1(starting_router):
 
     name_of_lsa = "area_1_lsa_3" + str(global_counter)
     global_counter += 1
-    print("name_of_lsa = ", name_of_lsa)
     name_of_lsa = LSATriangles(inter_area_routes["router_2__TO__router_abr1"][0], 
                     inter_area_routes["router_2__TO__router_abr1"][1], 
                     router_ABR1_color)
@@ -960,7 +1003,6 @@ def initialize_LSA3_from_area_2_to_area_1(starting_router):
 
     name_of_lsa = "area_1_lsa_3" + str(global_counter)
     global_counter += 1
-    print("name_of_lsa = ", name_of_lsa)
     name_of_lsa = LSATriangles(inter_area_routes["router_2__TO__router_abr1"][0], 
                                 inter_area_routes["router_2__TO__router_abr1"][1], 
                                 router_ABR1_color)
@@ -1188,6 +1230,30 @@ def SendArea3LSA1(pygame, screen):
     
     return 0 # in progress
 
+def erase_text_area_3():
+    global text_dictionary_LSA_3_area_3
+    global list_text_position_area_3
+    global list_of_Area_3_triangles
+
+    text_dictionary_LSA_3_area_3 = {}
+    list_text_position_area_3 = []
+    list_of_Area_3_triangles = []
+
+    print("Router 1: ", router_1_text)
+    print("Router 1: ", router_2_text)
+    print("Router 1: ", router_3_text)
+    print("Router 1: ", router_4_text)
+    print("Router 1: ", router_5_text)
+    print("Router 1: ", router_6_text)
+    print("Router 1: ", router_ABR_text)
+    print("Router 1: ", router_7_text)
+    print("Router 1: ", router_8_text)
+    print("Router 1: ", router_9_text)
+    print("Router 1: ", router_10_text)
+    print("Router 1: ", router_11_text)
+    print("Router 1: ", router_12_text)
+    print("Router 1: ", router_13_text)
+    print("Router 1: ", router_14_text)
 
 def initialize_LSA3_from_area_2_to_area_3(router_started):
     global global_counter
@@ -1317,7 +1383,6 @@ def send_LSA_4_from_area_2_to_area_1(starting_router):
 
     name_of_lsa = "area_1_lsa_4" + str(global_counter)
     global_counter += 1
-    print("name_of_lsa = ", name_of_lsa)
     name_of_lsa = LSATriangles(inter_area_routes["router_2__TO__router_abr1"][0], 
                     inter_area_routes["router_2__TO__router_abr1"][1], 
                     router_7_color)
@@ -1333,7 +1398,6 @@ def send_LSA_4_from_area_2_to_area_1(starting_router):
 
     name_of_lsa = "area_1_lsa_4" + str(global_counter)
     global_counter += 1
-    print("name_of_lsa = ", name_of_lsa)
     name_of_lsa = LSATriangles(inter_area_routes["router_2__TO__router_abr1"][0], 
                                 inter_area_routes["router_2__TO__router_abr1"][1], 
                                 router_7_color)
@@ -1372,26 +1436,29 @@ def send_LSA_4_from_area_2_to_area_1(starting_router):
 
 def initialise_LSA_5():
     # ROUTER 7 LSA 3 --> only sent out by the boundary router
-    name_of_lsa = "area_1_lsa_4" + str(global_counter)
+    global global_counter
+    name_of_lsa = "lsa_5" + str(global_counter)
     global_counter += 1
-    router_7_t1 = LSATriangles(inter_area_routes["router_7__TO__router_abr1"][0],
+    name_of_lsa = LSATriangles(inter_area_routes["router_7__TO__router_abr1"][0],
                                 inter_area_routes["router_7__TO__router_abr1"][1],
                                 (117, 227, 104))
-    router_7_t1.enable_full_route([inter_area_routes["router_7__TO__router_abr1"][0],
+    name_of_lsa.enable_full_route([inter_area_routes["router_7__TO__router_abr1"][0],
                                    inter_area_routes["router_7__TO__router_abr1"][1],
                                     inter_area_routes["router_2__TO__router_abr1"][0], 
                                     inter_area_routes["router_2__TO__router_abr1"][1],
                                     area_1_travel_routes["router_2__TO__router_6"][0],
                                     area_1_travel_routes["router_2__TO__router_6"][1]])
-    router_7_t1.update_starting_router("router_7")
-    router_7_t1.update_router_path_names(["ABR_1", "router_2", "router_6"])
-    
-    name_of_lsa = "area_1_lsa_4" + str(global_counter)
+    name_of_lsa.update_starting_router("router_7")
+    name_of_lsa.update_router_path_names(["ABR_1", "router_2", "router_6"])
+    name_of_lsa.set_LSA_type(5, 2, 1, "Router7: ASBR")
+    list_of_Area_2_triangles.append(name_of_lsa)
+
+    name_of_lsa = "lsa_5" + str(global_counter)
     global_counter += 1
-    router_7_t2 = LSATriangles(inter_area_routes["router_7__TO__router_abr1"][0],
+    name_of_lsa = LSATriangles(inter_area_routes["router_7__TO__router_abr1"][0],
                                 inter_area_routes["router_7__TO__router_abr1"][1],
                                 (117, 227, 104))
-    router_7_t2.enable_full_route([inter_area_routes["router_7__TO__router_abr1"][0],
+    name_of_lsa.enable_full_route([inter_area_routes["router_7__TO__router_abr1"][0],
                                    inter_area_routes["router_7__TO__router_abr1"][1],
                                     inter_area_routes["router_2__TO__router_abr1"][0], 
                                     inter_area_routes["router_2__TO__router_abr1"][1],
@@ -1400,15 +1467,17 @@ def initialise_LSA_5():
                                     area_1_travel_routes["router_5_area_1__TO__router_1"][1],
                                     area_1_travel_routes["router_5_area_1__TO__router_1"][0]])
     
-    router_7_t2.update_starting_router("router_7")
-    router_7_t2.update_router_path_names(["ABR_1", "router_2", "router_5", "router_1"])
+    name_of_lsa.update_starting_router("router_7")
+    name_of_lsa.update_router_path_names(["ABR_1", "router_2", "router_5", "router_1"])
+    name_of_lsa.set_LSA_type(5, 2, 1, "Router7: ASBR")
+    list_of_Area_2_triangles.append(name_of_lsa)
 
-    name_of_lsa = "area_1_lsa_4" + str(global_counter)
+    name_of_lsa = "lsa_5" + str(global_counter)
     global_counter += 1
-    router_7_t3 = LSATriangles(inter_area_routes["router_7__TO__router_abr1"][0],
+    name_of_lsa = LSATriangles(inter_area_routes["router_7__TO__router_abr1"][0],
                                    inter_area_routes["router_7__TO__router_abr1"][1],
                                             (117, 227, 104))
-    router_7_t3.enable_full_route([inter_area_routes["router_7__TO__router_abr1"][0],
+    name_of_lsa.enable_full_route([inter_area_routes["router_7__TO__router_abr1"][0],
                                    inter_area_routes["router_7__TO__router_abr1"][1],
                                     inter_area_routes["router_2__TO__router_abr1"][0], 
                                     inter_area_routes["router_2__TO__router_abr1"][1],
@@ -1419,31 +1488,37 @@ def initialise_LSA_5():
                                     area_1_travel_routes["router_4__TO__router_3"][1],
                                     area_1_travel_routes["router_4__TO__router_3"][0]])
     
-    router_7_t3.update_starting_router("router_7")
-    router_7_t3.update_router_path_names(["ABR_1", "router_2", "router_5", "router_4", "router_3"])
+    name_of_lsa.update_starting_router("router_7")
+    name_of_lsa.update_router_path_names(["ABR_1", "router_2", "router_5", "router_4", "router_3"])
+    name_of_lsa.set_LSA_type(5, 2, 1, "Router7: ASBR")
+    list_of_Area_2_triangles.append(name_of_lsa)
 
-    name_of_lsa = "area_1_lsa_4" + str(global_counter)
+    name_of_lsa = "lsa_5" + str(global_counter)
     global_counter += 1
-    router_7_t5 = LSATriangles(area_2_travel_routes["router_7__TO__router_10"][0],
+    name_of_lsa = LSATriangles(area_2_travel_routes["router_7__TO__router_10"][0],
                                 area_2_travel_routes["router_7__TO__router_10"][1],
                                 (117, 227, 104))
-    router_7_t5.enable_full_route([area_2_travel_routes["router_7__TO__router_10"][0],
+    name_of_lsa.enable_full_route([area_2_travel_routes["router_7__TO__router_10"][0],
                                    area_2_travel_routes["router_7__TO__router_10"][1],
                                    area_2_travel_routes["router_9__TO__router_10"][1],
                                    area_2_travel_routes["router_9__TO__router_10"][0]])
-    router_7_t5.update_starting_router("router_7")
-    router_7_t5.update_router_path_names(["router_10", "router_9"])
+    name_of_lsa.update_starting_router("router_7")
+    name_of_lsa.update_router_path_names(["router_10", "router_9"])
+    name_of_lsa.set_LSA_type(5, 2, 1, "Router7: ASBR")
+    list_of_Area_2_triangles.append(name_of_lsa)
 
     name_of_lsa = "area_1_lsa_4" + str(global_counter)
     global_counter += 1
-    router_7_t6 = LSATriangles(area_2_travel_routes["router_7__TO__router_8"][0],
+    name_of_lsa = LSATriangles(area_2_travel_routes["router_7__TO__router_8"][0],
                                 area_2_travel_routes["router_7__TO__router_8"][1],
                                 (117, 227, 104))
-    router_7_t6.enable_full_route([area_2_travel_routes["router_7__TO__router_8"][0],
+    name_of_lsa.enable_full_route([area_2_travel_routes["router_7__TO__router_8"][0],
                                    area_2_travel_routes["router_7__TO__router_8"][1],
                                    area_2_travel_routes["router_8__TO__router_9"][0],
                                    area_2_travel_routes["router_8__TO__router_9"][1],
                                    area_2_travel_routes["router_9__TO__router_10"][0],
                                    area_2_travel_routes["router_9__TO__router_10"][1]])
-    router_7_t6.update_starting_router("router_7")
-    router_7_t6.update_router_path_names(["router_8", "router_9", "router_10"])
+    name_of_lsa.update_starting_router("router_7")
+    name_of_lsa.update_router_path_names(["router_8", "router_9", "router_10"])
+    name_of_lsa.set_LSA_type(5, 2, 1, "Router7: ASBR")
+    list_of_Area_2_triangles.append(name_of_lsa)

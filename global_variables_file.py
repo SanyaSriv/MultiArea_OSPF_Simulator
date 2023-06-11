@@ -30,6 +30,8 @@ master_simulator_refresh = (190, 120)
 button_display_seperate_lsa_3 = (1010, 20)
 seperate_lsa_3_width = 150
 
+button_clearing_texts = (1020, 80)
+
 # For sliders
 slider_width = 70
 slider_height = 20

@@ -9,6 +9,8 @@
 2. **Technology Used**
 
     This project has been programmed in Python. The library PyGame has been used to develop the topography and interactive user interface. All the code has been pushed to a private GitHub repository: [https://github.com/SanyaSriv/MultiArea_OSPF_Simulator](https://github.com/SanyaSriv/MultiArea_OSPF_Simulator)
+    
+    Command to start the simulation: <code>python3 main.py</code>
 
 3. **Description of the Topology**
 

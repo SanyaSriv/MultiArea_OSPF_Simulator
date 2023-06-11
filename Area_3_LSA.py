@@ -120,8 +120,8 @@ def SendArea3LSA1(pygame, screen):
         if (to_be_removed == 1):
             list_of_Area_3_triangles.remove(i) # so we do not have a permanent triangle stationed on the last router
         if (router_reached != None):
-            text_string = "Recieved LSA 1: {}".format(router_started)
-            dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
+            text_string = "Received LSA 1: {}".format(router_started)
+            dictionary_text_string = "{} Received LSA 1 from {}".format(router_reached, router_started)
             
             if (dictionary_text_string in text_dictionary_LSA_1_area_3):
                 continue

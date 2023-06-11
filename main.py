@@ -161,7 +161,7 @@ def RouterSwitchArea2():
 
     font = pygame.font.SysFont('Arial', 25)
     text = font.render("Area 2 (Backbone Area)", True, (0, 0, 0))
-    screen.blit(text, (530, 530))
+    screen.blit(text, (530, 560))
 
 def Area2Connections():
     # router 7 --> router 8
@@ -474,9 +474,9 @@ def AddAnimationButtons():
     # button for seperate LSA 3
     pygame.draw.rect(screen, (31, 128, 48), (button_display_seperate_lsa_3[0], button_display_seperate_lsa_3[1], seperate_lsa_3_width, button_height))
 
-    text_3 = font.render('Display seperate LSA 3', True, (0, 0, 0))
+    text_3 = font.render('Display separate LSA 3', True, (0, 0, 0))
 
-    text_pos_switch = ((seperate_lsa_3_width - font.size('Display seperate LSA 3')[0]) // 2, (button_height - font.size('Send LSA 5')[1]) // 2)
+    text_pos_switch = ((seperate_lsa_3_width - font.size('Display separate LSA 3')[0]) // 2, (button_height - font.size('Send LSA 5')[1]) // 2)
     screen.blit(text_3, (button_display_seperate_lsa_3[0] + text_pos_switch[0], button_display_seperate_lsa_3[1] + text_pos_switch[1]))
 
     # button for clearing text
@@ -510,6 +510,37 @@ master_simulation_trigger = 0
 switch  = 1 # we start with LSA 1
 
 speed_slider_dragging = 0
+print("Multi Area OSPF Simulator")
+print("Topology Information: ")
+print("Number of Areas = 3")
+print("Area Names: Area 1 | Area 2 | Area 3")
+print("Backbone Area = Area 2")
+print("Subby Area = Area 3")
+print("ABRs = Router ABR 1 | Router 11 (ABR 2)")
+print("ASBR = Router 7 ")
+print("\n")
+print("Commands -->")
+print("Press button --> Send LSA1 : to simulate LSA 1 traversal")
+print("Press button --> Clear LSA1 text : to clear the text displayed by LSA 1s")
+print("Press button --> Single LSA3 : to simulate single LSA 3 traversal")
+print("                 There would be multiple LSA 3 packets all over, but this button is to ")
+print("                 simulate how a single LSA 3 would travel from the ABRs into the 3 areas")
+print("                 This does not show all the LSA 3 traversals")
+print("                 If you want to see all LSA 3 packets, then use the master simulation")
+print("Press button --> Clear LSA3 text : to clear the text displayed by LSA 3s")
+print("Press button --> Send LSA4 : to simulate LSA 4 traversal")
+print("Press button --> Clear LSA4 text : to clear the text displayed by LSA 4s")
+print("Press button --> Send LSA5 : to simulate LSA 5 traversal")
+print("Press button --> Clear LSA5 text : to clear the text displayed by LSA 5s")
+print("Press button --> Master Simulation : to simulate all the packet traversals together")
+print("Press button --> Clear Master Simulation : to clear the text displayed by Master Simulation")
+print("\n")
+print("Buttons specific for Master Simulation: ")
+print("Press toggle button --> Display separate LSA 3s : to display the information about the router that sent the LSA 3 packet")
+print("                        without this turned on, you would just see a message like 'Received LSA 3: area 1' ")
+print("                        with this, you would see which router sent the LSA 3 that was received")
+print("Press toggle button --> Display Shortened Texts : to display shorter strings for the master simulation so everything is clearly visible")
+
 
 while running:
     screen.fill((255,255,255))
@@ -541,7 +572,7 @@ while running:
                 # TODO: If we set LSA_1_trigger = 0 in here, then the text dissapears but the LSA 1 sending process stops
                 # to not stop the process while clearing the text, set LSA_1_trigger = 0 by some other button
                 LSA_1_trigger = 0
-                print("Clearing text displayd by LSA 1")
+                print("Clearing text displayed by LSA 1")
                 Area_1_LSA.erase_text()
                 Area_2_LSA.erase_text()
                 Area_3_LSA.erase_text()

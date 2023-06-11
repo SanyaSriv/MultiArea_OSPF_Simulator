@@ -93,7 +93,7 @@ router_18_pos = (1320, 600)
 router_abr_1 = (455, 245)
 
 # making the ASBR
-router_isp_pos = (750, 60)
+router_isp_pos = (500, 60)
 
 
 switch_4_pos = (1295, 445)

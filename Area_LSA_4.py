@@ -182,11 +182,11 @@ def Send_LSA_4(pygame, screen):
             list_of_LSA_4_triangles.remove(i) # so we do not have a permanent triangle stattioned on the last router
         if (router_reached != None):
             if router_reached in ["router_7", "router_8", "router_9", "router_10", "ABR_1", "router_11"]:
-                text_string = "Recieved LSA 1: {}".format(router_started)
-                dictionary_text_string = "{} Recieved LSA 4 from {}".format(router_reached, router_started)
+                text_string = "Received LSA 1: {}".format(router_started)
+                dictionary_text_string = "{} Received LSA 4 from {}".format(router_reached, router_started)
             else:
-                text_string = "Recieved LSA 4: {}".format(router_started)
-                dictionary_text_string = "{} Recieved LSA 4 from {}".format(router_reached, router_started)
+                text_string = "Received LSA 4: {}".format(router_started)
+                dictionary_text_string = "{} Received LSA 4 from {}".format(router_reached, router_started)
             
             if (dictionary_text_string in text_dictionary_LSA_4):
                 continue

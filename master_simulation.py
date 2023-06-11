@@ -71,7 +71,7 @@ def global_initialization(LSA_3):
     router_4_text = [35, 330, 1]
     router_5_text = [175, 410, 1]
     router_6_text = [325, 530, 1]
-    router_7_text = [630, 100, 1]
+    router_7_text = [655, 160, 1]
     router_8_text = [460, 280, 1]
     router_9_text = [610, 460, 1]
     router_10_text = [750, 320, 1]
@@ -102,7 +102,7 @@ def initialize_Area1_LSA():
     global router_ABR_text
     global list_text_position, text_dictionary_LSA_1
     global list_of_Area_1_triangles
-
+    print("Sending Area 1 LSA 1s")
     list_text_position = []
     text_dictionary_LSA_1 = {}
     list_of_Area_1_triangles = []
@@ -445,30 +445,30 @@ def SendArea1LSA1(pygame, screen):
                 if i.get_LSA_type() == 3:
                     if seperate_lsa_3 == 1:
                         text_string = "LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
-                        dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Received LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
                     else:
                         text_string = "LSA 3: area {}".format(i.get_from_area())
-                        dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                        dictionary_text_string = "{} Received LSA 3 from {}".format(router_reached, i.get_from_area())
                 elif i.get_LSA_type() == 4:
                     text_string = "LSA 4: area {}".format(i.get_from_area())
-                    dictionary_text_string = "{} Recieved LSA 4 from {}".format(router_reached, i.get_from_area())
+                    dictionary_text_string = "{} Received LSA 4 from {}".format(router_reached, i.get_from_area())
                 else:
                     text_string = "LSA 1: {}".format(router_started)
-                    dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
+                    dictionary_text_string = "{} Received LSA 1 from {}".format(router_reached, router_started)
             else:
                 if i.get_LSA_type() == 3:
                     if seperate_lsa_3 == 1:
-                        text_string = "Recieved LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
-                        dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                        text_string = "Received LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Received LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
                     else:
-                        text_string = "Recieved LSA 3: area {}".format(i.get_from_area())
-                        dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                        text_string = "Received LSA 3: area {}".format(i.get_from_area())
+                        dictionary_text_string = "{} Received LSA 3 from {}".format(router_reached, i.get_from_area())
                 elif i.get_LSA_type() == 4:
-                    text_string = "Recieved LSA 4: area {}".format(i.get_from_area())
-                    dictionary_text_string = "{} Recieved LSA 4 from {}".format(router_reached, i.get_from_area())
+                    text_string = "Received LSA 4: area {}".format(i.get_from_area())
+                    dictionary_text_string = "{} Received LSA 4 from {}".format(router_reached, i.get_from_area())
                 else:
-                    text_string = "Recieved LSA 1: {}".format(router_started)
-                    dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
+                    text_string = "Received LSA 1: {}".format(router_started)
+                    dictionary_text_string = "{} Received LSA 1 from {}".format(router_reached, router_started)
                 
             if (dictionary_text_string in text_dictionary_LSA_1):
                 continue
@@ -520,7 +520,7 @@ def SendArea1LSA1(pygame, screen):
             text = font.render(i[0], True, (0, 0, 255))
             screen.blit(text, (i[1][0], i[1][1]))
         elif "LSA 5" in i[0]:
-            text = font.render(i[0], True, (0, 255, 0))
+            text = font.render(i[0], True, (81, 153, 12))
             screen.blit(text, (i[1][0], i[1][1]))
         else:
             text = font.render(i[0], True, (0, 0, 0))
@@ -552,7 +552,7 @@ def initialize_Area2_LSA():
     global router_11_text
     global list_text_position_area_2, text_dictionary_LSA_1_area_2
     global list_of_Area_2_triangles
-
+    print("Sending Area 2 LSA 1s")
     list_text_position_area_2 = []
     text_dictionary_LSA_1_area_2 = {}
     list_of_Area_2_triangles = []
@@ -864,32 +864,32 @@ def SendArea2LSA1(pygame, screen):
                 if i.get_LSA_type() == 3:
                     if seperate_lsa_3 == 1:
                         text_string = "LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
-                        dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Received LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
                     else:
                         text_string = "LSA 3: area {}".format(i.get_from_area())
-                        dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                        dictionary_text_string = "{} Received LSA 3 from {}".format(router_reached, i.get_from_area())
                 elif i.get_LSA_type() == 5:
                     text_string = "LSA 5 : {}".format("Router 7: ASBR")
-                    dictionary_text_string = "{} Recieved LSA 5 from {} : {}".format(router_reached, i.get_from_area(), "Router 7: ASBR")
+                    dictionary_text_string = "{} Received LSA 5 from {} : {}".format(router_reached, i.get_from_area(), "Router 7: ASBR")
                 else:
                     text_string = "LSA 1: {}".format(router_started)
-                    dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
+                    dictionary_text_string = "{} Received LSA 1 from {}".format(router_reached, router_started)
             else:
                 if i.get_LSA_type() == 3:
                     if seperate_lsa_3 == 1:
-                        text_string = "Recieved LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
-                        dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                        text_string = "Received LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Received LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
                     else:
-                        text_string = "Recieved LSA 3: area {}".format(i.get_from_area())
-                        dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                        text_string = "Received LSA 3: area {}".format(i.get_from_area())
+                        dictionary_text_string = "{} Received LSA 3 from {}".format(router_reached, i.get_from_area())
                 elif i.get_LSA_type() == 5:
-                    text_string = "Recieved LSA 5 : {}".format("Router 7: ASBR")
-                    dictionary_text_string = "{} Recieved LSA 5 from {} : {}".format(router_reached, i.get_from_area(), "Router 7: ASBR")
+                    text_string = "Received LSA 5 : {}".format("Router 7: ASBR")
+                    dictionary_text_string = "{} Received LSA 5 from {} : {}".format(router_reached, i.get_from_area(), "Router 7: ASBR")
                 else:
-                    text_string = "Recieved LSA 1: {}".format(router_started)
-                    dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
-            # text_string = "Recieved LSA 1: {}".format(router_started)
-            # dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
+                    text_string = "Received LSA 1: {}".format(router_started)
+                    dictionary_text_string = "{} Received LSA 1 from {}".format(router_reached, router_started)
+            # text_string = "Received LSA 1: {}".format(router_started)
+            # dictionary_text_string = "{} Received LSA 1 from {}".format(router_reached, router_started)
             
             if (dictionary_text_string in text_dictionary_LSA_1_area_2):
                 continue
@@ -959,7 +959,7 @@ def SendArea2LSA1(pygame, screen):
             text = font.render(i[0], True, (255, 0, 0))
             screen.blit(text, (i[1][0], i[1][1]))
         elif "LSA 5" in i[0]:
-            text = font.render(i[0], True, (0, 255, 0))
+            text = font.render(i[0], True, (81, 153, 12))
             screen.blit(text, (i[1][0], i[1][1]))
         else:
             text = font.render(i[0], True, (0, 0, 0))
@@ -985,7 +985,7 @@ def erase_text_area_2():
 def initialize_LSA3_from_area_2_to_area_1(starting_router):
     global global_counter
     global list_of_Area_1_triangles
-
+    print("Sending LSA 3s from Area 2 to Area 1")
     name_of_lsa = "area_1_lsa_3" + str(global_counter)
     global_counter += 1
     name_of_lsa = LSATriangles(inter_area_routes["router_2__TO__router_abr1"][0], 
@@ -1042,7 +1042,7 @@ def initialize_LSA3_from_area_2_to_area_1(starting_router):
 def initialize_LSA3_from_area_1_to_area_2(starting_router):
     # ROUTER 2 LSA 3 --> only sent out by the boundary router
     global global_counter
-
+    print("Sending LSA 3s from Area 1 to Area 2 and Area 3")
     name_of_lsa = "area_2_lsa_3" + str(global_counter)
     global_counter += 1
     name_of_lsa = LSATriangles(inter_area_routes["router_7__TO__router_abr1"][1], 
@@ -1088,7 +1088,7 @@ def initialize_Area3_LSA():
     global router_11_text, router_12_text, router_13_text, router_14_text
     global list_text_position_area_3, text_dictionary_LSA_1_area_3
     global list_of_Area_3_triangles
-
+    print("Sending Area 3 LSA 1s")
     # initialize all the text positions
     router_11_text = [950, 245, 1]
     router_12_text = [1030, 385, 1]
@@ -1190,16 +1190,28 @@ def SendArea3LSA1(pygame, screen):
         if (to_be_removed == 1):
             list_of_Area_3_triangles.remove(i) # so we do not have a permanent triangle stationed on the last router
         if (router_reached != None):
-            if i.get_LSA_type() == 3:
-                if seperate_lsa_3 == 1:
-                    text_string = "Recieved LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
-                    dictionary_text_string = "{} Recieved LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+            if clearing_text == 1:
+                if i.get_LSA_type() == 3:
+                    if seperate_lsa_3 == 1:
+                        text_string = "LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Received LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                    else:
+                        text_string = "LSA 3: area {}".format(i.get_from_area())
+                        dictionary_text_string = "{} Received LSA 3 from {}".format(router_reached, i.get_from_area())
                 else:
-                    text_string = "Recieved LSA 3: area {}".format(i.get_from_area())
-                    dictionary_text_string = "{} Recieved LSA 3 from {}".format(router_reached, i.get_from_area())
+                    text_string = "LSA 1: {}".format(router_started)
+                    dictionary_text_string = "{} Received LSA 1 from {}".format(router_reached, router_started)
             else:
-                text_string = "Recieved LSA 1: {}".format(router_started)
-                dictionary_text_string = "{} Recieved LSA 1 from {}".format(router_reached, router_started)
+                if i.get_LSA_type() == 3:
+                    if seperate_lsa_3 == 1:
+                        text_string = "Received LSA 3: area {} : {}".format(i.get_from_area(), i.get_lsa_3_starting_router())
+                        dictionary_text_string = "{} Received LSA 3 from {} : {}".format(router_reached, i.get_from_area(), i.get_lsa_3_starting_router())
+                    else:
+                        text_string = "Received LSA 3: area {}".format(i.get_from_area())
+                        dictionary_text_string = "{} Received LSA 3 from {}".format(router_reached, i.get_from_area())
+                else:
+                    text_string = "Received LSA 1: {}".format(router_started)
+                    dictionary_text_string = "{} Received LSA 1 from {}".format(router_reached, router_started)
             
             if (dictionary_text_string in text_dictionary_LSA_1_area_3):
                 continue
@@ -1239,25 +1251,25 @@ def erase_text_area_3():
     list_text_position_area_3 = []
     list_of_Area_3_triangles = []
 
-    print("Router 1: ", router_1_text)
-    print("Router 1: ", router_2_text)
-    print("Router 1: ", router_3_text)
-    print("Router 1: ", router_4_text)
-    print("Router 1: ", router_5_text)
-    print("Router 1: ", router_6_text)
-    print("Router 1: ", router_ABR_text)
-    print("Router 1: ", router_7_text)
-    print("Router 1: ", router_8_text)
-    print("Router 1: ", router_9_text)
-    print("Router 1: ", router_10_text)
-    print("Router 1: ", router_11_text)
-    print("Router 1: ", router_12_text)
-    print("Router 1: ", router_13_text)
-    print("Router 1: ", router_14_text)
+    # print("Router 1: ", router_1_text)
+    # print("Router 1: ", router_2_text)
+    # print("Router 1: ", router_3_text)
+    # print("Router 1: ", router_4_text)
+    # print("Router 1: ", router_5_text)
+    # print("Router 1: ", router_6_text)
+    # print("Router 1: ", router_ABR_text)
+    # print("Router 1: ", router_7_text)
+    # print("Router 1: ", router_8_text)
+    # print("Router 1: ", router_9_text)
+    # print("Router 1: ", router_10_text)
+    # print("Router 1: ", router_11_text)
+    # print("Router 1: ", router_12_text)
+    # print("Router 1: ", router_13_text)
+    # print("Router 1: ", router_14_text)
 
 def initialize_LSA3_from_area_2_to_area_3(router_started):
     global global_counter
-
+    print("Sending LSA 3s from Area 2 to Area 3")
     name_of_lsa = "area_3_lsa_3" + str(global_counter)
     global_counter += 1
     name_of_lsa = LSATriangles(area_3_travel_routes["router_11__TO__router_13"][0],
@@ -1275,6 +1287,7 @@ def initialize_LSA3_from_area_2_to_area_3(router_started):
     list_of_Area_2_triangles.append(name_of_lsa)
 
 def initialize_LSA3_from_area_3_to_area_2(router_started):
+    print("Sending LSA 3s from Area 3 to Area 2 and Area 1")
     global global_counter
     global list_of_Area_2_triangles
 
@@ -1380,7 +1393,7 @@ def initialize_LSA3_from_area_3_to_area_2(router_started):
 def send_LSA_4_from_area_2_to_area_1(starting_router):
     global global_counter
     global list_of_Area_1_triangles
-
+    print("Sending LSA 4s from Area 2 to Area 1")
     name_of_lsa = "area_1_lsa_4" + str(global_counter)
     global_counter += 1
     name_of_lsa = LSATriangles(inter_area_routes["router_2__TO__router_abr1"][0], 
@@ -1435,6 +1448,7 @@ def send_LSA_4_from_area_2_to_area_1(starting_router):
 
 
 def initialise_LSA_5():
+    print("Sending LSA 5s from ASBR (Router 7)")
     # ROUTER 7 LSA 3 --> only sent out by the boundary router
     global global_counter
     name_of_lsa = "lsa_5" + str(global_counter)
